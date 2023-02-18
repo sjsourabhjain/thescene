@@ -57,45 +57,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <div class="box bg-white">
-                        <div class="box-row">
-                            <div class="box-content">
-                                <h6>{{__('level.total')}} {{__('level.variant')}}</h6>
-                                <p class="h1 m-0">{{ Helper::get_tot_variant() }}</p>
-                            </div>
-                            <div class="box-icon cart">
-                                <div id="today-revenue" style='width: 100%; height: 100px;'></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="box bg-white">
-                        <div class="box-row">
-                            <div class="box-content">
-                                <h6>{{__('level.total')}} {{__('level.product')}}</h6>
-                                <p class="h1 m-0">{{ Helper::get_tot_product() }}</p>
-                            </div>
-                            <div class="box-icon cart">
-                                <div id="today-revenue" style='width: 100%; height: 100px;'></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="box bg-white">
-                        <div class="box-row">
-                            <div class="box-content">
-                                <h6>{{__('level.total')}} {{__('level.order')}}</h6>
-                                <p class="h1 m-0">{{ Helper::get_tot_order() }}</p>
-                            </div>
-                            <div class="box-icon cart">
-                                <div id="today-revenue" style='width: 100%; height: 100px;'></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 @endsection
