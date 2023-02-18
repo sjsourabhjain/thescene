@@ -42,19 +42,11 @@
                     </ul>
                 </li>
                 @endcan
-                @can('variant')
-                <li class="nav-item {{ (request()->is('admin/*variant*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Variant </a>
+                @can('events')
+                <li class="nav-item {{ (request()->is('admin/*events*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> events </a>
                     <ul class="sub-menu">
-                        <li class="nav-item {{ (request()->is('admin/list-variant')) ? 'active' : '' }}"><a href="{{ route('admin.list_variant') }}" class="nav-link">{{__('level.list')}}</a></li>
-                        <li class="nav-item {{ (request()->is('admin/create-variant')) ? 'active' : '' }}"><a href="{{ route('admin.create_variant') }}" class="nav-link">{{__('level.add')}}</a></li>
-                    </ul>
-                </li>
-                @endcan
-                @can('product')
-                <li class="nav-item {{ (request()->is('admin/*product*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Product </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item {{ (request()->is('admin/list-product')) ? 'active' : '' }}"><a href="{{ route('admin.list_product') }}" class="nav-link">{{__('level.list')}}</a></li>
-                        <li class="nav-item {{ (request()->is('admin/create-product')) ? 'active' : '' }}"><a href="{{ route('admin.create_product') }}" class="nav-link">{{__('level.add')}}</a></li>
+                        <li class="nav-item {{ (request()->is('admin/list-events')) ? 'active' : '' }}"><a href="{{ route('admin.list_events') }}" class="nav-link">{{__('level.list')}}</a></li>
+                        <li class="nav-item {{ (request()->is('admin/create-events')) ? 'active' : '' }}"><a href="{{ route('admin.create_events') }}" class="nav-link">{{__('level.add')}}</a></li>
                     </ul>
                 </li>
                 @endcan

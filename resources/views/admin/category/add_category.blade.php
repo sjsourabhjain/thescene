@@ -48,14 +48,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label>Image</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" name="image_name">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-12 mb-3 text-center">
                                 <a href="{{ route('admin.list_category') }}" class="btn light">Cancel</a>
                                 <button type="submit" class="btn light">Submit</button>

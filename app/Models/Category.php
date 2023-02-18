@@ -15,8 +15,7 @@ class Category extends Authenticatable
      */
     protected $fillable = [
         'category_name',
-        'parent_id',
-        'category_image'
+        'parent_id'
     ];
 
     public function parent_category(){

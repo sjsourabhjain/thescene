@@ -37,15 +37,6 @@ class Helper{
 	public static function get_tot_category(){
 		return Category::count();
 	}
-	public static function get_tot_variant(){
-		return Variant::count();
-	}
-	public static function get_tot_product(){
-		return Product::count();
-	}
-	public static function get_tot_order(){
-		return Order::count();
-	}
 	public static function pr($arr = []){
 		echo "<pre>"; print_r($arr); echo "</pre>";
 	}

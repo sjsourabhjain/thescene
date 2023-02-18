@@ -34,7 +34,6 @@ class CategoryController extends Controller
                             return "<img height='100' width='100' src='".asset("uploads/".$row["category_image"])."'>";
                         })
                         ->addColumn('action', function($row){
-                            //$btn = '<a href="'.route('admin.show_category',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
                             $btn = '<a href="'.route('admin.edit_category',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
                             return $btn;
                         })
@@ -69,26 +68,13 @@ class CategoryController extends Controller
     public function store(Request $request){
         $validator = $request->validate([
             'category_name'     => 'required|string|max:250',
-            'image_name'     => 'required',
-            'parent_id'  => 'nullable|numeric'
         ],[],[
             'category_name'=>'Category Name',
-            'image_name'=>'Category Image',
             'parent_id'=>'Parent Category',
         ]);
 
         try{
-            $category_image = '';
-
-            if($request->hasFile('image_name')){
-                $file = $request->file('image_name');
-                $originalname = $file->getClientOriginalName();
-                $file_name = time()."_".$originalname;
-                $file->move('uploads/categories/',$file_name);
-                $category_image = "categories/".$file_name;
-                $request->request->add(['category_image' => $category_image]);
-            }
-
+            
             Category::create($request->all());
             return redirect()->route('admin.list_category')->with('success','Category Added Successfully.');
         }catch(\Exception $e){
