@@ -37,3 +37,59 @@
     <!-- CUSTOM CSS -->
     <link href="{{asset('assets-front/css/style.css')}}" rel="stylesheet">
 </head>
+<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+  
+
+    <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
+        <div class="container">
+            <a class="navbar-brand" href="{{url('')}}"><img src="{{asset('assets-front/images/logo.png')}}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="ti-menu"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link">Home</a>
+                    </li>
+
+                    <li class="nav-item @@about">
+                        <a class="nav-link" href="/about-us">About</a>
+                    </li>
+                    <li class="nav-item @@about">
+                        <a class="nav-link" href="/events">Events</a>
+                    </li>
+
+                    <li class="nav-item @@about">
+                        <a class="nav-link" href="create-event.html">Create an event</a>
+                    </li>
+                    <li class="nav-item @@contact">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                @if (Session('user'))
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" style="text-transform: lowercase;" href="#"
+                            data-toggle="dropdown"><i class="ti-user"></i>{{Session('user')->email}}
+                            <span><i class="ti-angle-down"></i></span>
+                        </a>
+                        <!-- Dropdown list -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item " href="/account-setting">Account Setting</a></li>
+                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+
+                        </ul>
+                    </li>
+                @endif
+                    
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <div class="col-12 text-right">
+                            <button class="btn btn-main-md"><a href="sell-ticket.html">Sell Ticket</a></button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
