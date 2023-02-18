@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OtherController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +52,7 @@ Route::get('/contact-us', function() {
   return view('webviews/contact');
 });
 
-
+Route::get('/events',[EventsController::class,'index']);
 
 
 //add admin
