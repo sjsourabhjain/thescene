@@ -16,9 +16,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/',function(){
-    return redirect('admin');
-});
 
 Route::get('/admin',function(){
     return redirect('admin/');
@@ -32,9 +29,14 @@ Route::get('/migrate-run',[OtherController::class,'migrate_run']);
 
 Route::middleware('auth')->group(function(){
 
-    Route::get('/home',[HomeController::class, 'home'])->name('home');  //test
+      //test
 
 });
+
+Route::get('/', function() {
+  return view('webviews/home');
+});
+
 Route::get('/about-us', function() {
   return view('webviews/about-us');
 });
