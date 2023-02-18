@@ -50,14 +50,6 @@
                     </ul>
                 </li>
                 @endcan
-                @can('offer')
-                <li class="nav-item {{ (request()->is('admin/*offer*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Offer </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item {{ (request()->is('admin/list-offer')) ? 'active' : '' }}"><a href="{{ route('admin.list_offer') }}" class="nav-link">{{__('level.list')}}</a></li>
-                        <li class="nav-item {{ (request()->is('admin/create-offer')) ? 'active' : '' }}"><a href="{{ route('admin.create_offer') }}" class="nav-link">{{__('level.add')}}</a></li>
-                    </ul>
-                </li>
-                @endcan
                 @can('order')
                 <li class="nav-item {{ (request()->is('admin/*order*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Order </a>
                     <ul class="sub-menu">
