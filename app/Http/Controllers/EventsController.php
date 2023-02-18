@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,14 +8,13 @@ class EventsController extends Controller
 {
     public function index(Request $req)
     {
-
         $data['events'] = DB::table('events')
             ->when($req->categories_filter, function ($query, $categories_filter) {
                 $query->whereIn('event_category', $categories_filter);
             })
             ->paginate(5);
         $data['categories'] = DB::table('event_categories')->get();
-        return view('user/events', $data);
+        return view('webview/events', $data);
     }
 
 

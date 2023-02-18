@@ -1,4 +1,4 @@
-@include('user/header')
+@include('webviews/header')
 <section class="privacy section pt-0">
     <div class="container">
         <div class="row">
@@ -23,7 +23,7 @@
                                     value="ENGLISHMX4D"> <span class="tn-checkbox"></span> <span
                                     class="tn-label">ENGLISHMX4D</span></label></li>
                     </ul>
-                </div> --}}
+                </div>
                     <div class="filter-category tn-entity-filter-category">
                         <h5>Categories</h5>
 
@@ -38,7 +38,7 @@
                         </ul>
                     </div>
                 </form>
-                {{-- <div class="filter-category tn-entity-filter-category">
+                 <div class="filter-category tn-entity-filter-category">
                     <h5>Day</h5>
                     <ul id="ulLanguageFilter" class="category-filters">
                         <li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter"
@@ -137,7 +137,7 @@
         </div>
     </div>
 </section>
-{{ $events->onEachSide(2)->appends(request()->all())->links('pagination::event_pagination') }}
+{{-- $events->onEachSide(2)->appends(request()->all())->links('pagination::event_pagination') --}}
 <!--====  End of Privacy Policy  ====-->
 {{-- <section class="privacy section pt-0">
     <div class="container">
@@ -167,4 +167,4 @@
     }
 </script>
 
-@include('user/footer')
+@include('webviews/footer')
