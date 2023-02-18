@@ -274,10 +274,10 @@ class ApiController extends Controller
     }
     public function login(Request $request){
         $validator = Validator::make($request->all(),[
-            'mob_no'     => 'required|numeric',
+            'email'     => 'required',
             'password'  => 'required'
         ],[],[
-            'mob_no'=>'Mobile No.',
+            'email'=>'Email',
             'password'=>'Password',
         ]);
 
@@ -293,7 +293,7 @@ class ApiController extends Controller
         try{
             //Request is valid, create new user
             $password = $request->password;
-            $user_details = User::where(["mob_no"=>$request->mob_no])->first();
+            $user_details = User::where(["email"=>$request->email])->first();
             if(empty($user_details)){
                 return response()->json([
                     'status' => false,

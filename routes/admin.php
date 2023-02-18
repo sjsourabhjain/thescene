@@ -50,14 +50,6 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     Route::post('/update-category','CategoryController@update')->name('update_category');
     Route::delete('/delete-category/{id}','CategoryController@destroy')->name('delete_category');
 
-    /* Variant module*/
-    Route::get('/list-variant','VariantController@index')->name('list_variant');
-    Route::get('/create-variant','VariantController@create')->name('create_variant');
-    Route::post('/store-variant','VariantController@store')->name('store_variant');
-    Route::get('/show-variant/{id}','VariantController@show')->name('show_variant');
-    Route::get('/edit-variant/{id}','VariantController@edit')->name('edit_variant');
-    Route::post('/update-variant','VariantController@update')->name('update_variant');
-    Route::delete('/delete-variant/{id}','VariantController@destroy')->name('delete_variant');
 
     /* Slider module*/
     Route::get('/list-slider','SliderController@index')->name('list_slider');
@@ -71,8 +63,7 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     Route::get('/delete-slider/{id}','SliderController@destroy')->name('delete_slider');
 
     /* Product module*/
-    Route::get('/list-product','ProductController@index')->name('list_product');
-    Route::get('/create-product','ProductController@create')->name('create_product');
+    Route::get('/list-events','ProductController@index')->name('list_product'); Route::get('/create-product','ProductController@create')->name('create_product');
     Route::post('/store-product','ProductController@store')->name('store_product');
     Route::get('/show-product/{id}','ProductController@show')->name('show_product');
     Route::get('/list-product-variants/{id}','ProductController@list_product_variants')->name('list_product_variants');
