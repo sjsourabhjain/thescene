@@ -26,14 +26,6 @@
                     </ul>
                 </li>
                 @endcan
-                @can('slider')
-                <li class="nav-item {{ (request()->is('admin/*slider*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Slider </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item {{ (request()->is('admin/list-slider')) ? 'active' : '' }}"><a href="{{ route('admin.list_slider') }}" class="nav-link">{{__('level.list')}}</a></li>
-                        <li class="nav-item {{ (request()->is('admin/create-slider')) ? 'active' : '' }}"><a href="{{ route('admin.create_slider') }}" class="nav-link">{{__('level.add')}}</a></li>
-                    </ul>
-                </li>
-                @endcan
                 @can('category')
                 <li class="nav-item {{ (request()->is('admin/*category*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Category </a>
                     <ul class="sub-menu">

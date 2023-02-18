@@ -42,5 +42,3 @@ Route::middleware('auth')->group(function(){
 
 //add admin
 include('admin.php');
-
-
