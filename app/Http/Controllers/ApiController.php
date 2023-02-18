@@ -94,9 +94,9 @@ class ApiController extends Controller
         //Validate data
 
         $validator = Validator::make($request->all(),[
-            'mob_no'     => 'required|numeric'
+            'email'     => 'required'
         ],[],[
-            'mob_no'=>'Mobile No.'
+            'email'=>'Email'
         ]);
 
         //Send failed response if request is not valid
@@ -109,11 +109,11 @@ class ApiController extends Controller
         }
 
         try{
-            $userDetails = User::where(["mob_no"=>$request->mob_no])->first();
+            $userDetails = User::where(["email"=>$request->email])->first();
             if(empty($userDetails)){
                 return response()->json([
                     'status' => false,
-                    'message' => 'Invalid Mobile No.',
+                    'message' => 'Invalid email',
                     'data'=>[]
                 ]);
             }
@@ -134,7 +134,7 @@ class ApiController extends Controller
             ]);
         }
     }
-    public function verifyAccount(Request $request){
+    /*public function verifyAccount(Request $request){
         //Validate data
 
         $validator = Validator::make($request->all(),[
@@ -271,7 +271,7 @@ class ApiController extends Controller
                 'data'=>[]
             ]);
         }
-    }
+    }*/
     public function login(Request $request){
         $validator = Validator::make($request->all(),[
             'email'     => 'required',
@@ -498,8 +498,7 @@ class ApiController extends Controller
         }
         try{
             User::where(["id"=>$request->user_id])->update([
-                "full_name"=>$request->full_name,
-                "email"=>$request->email
+                "full_name"=>$request->full_name
             ]);
             return response()->json([
                 'status' => true,
