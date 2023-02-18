@@ -35,12 +35,22 @@ Route::middleware('auth')->group(function(){
     Route::get('/home',[HomeController::class, 'home'])->name('home');  //test
 
 });
+Route::get('/about-us', function() {
+  return view('webviews/about-us');
+});
+Route::get('/privacy-policy', function() {
+  return view('webviews/privacy-policy');
+});
+Route::get('/terms-conditions', function() {
+  return view('webviews/term-conditions');
+});
 
+Route::get('/contact-us', function() {
+  return view('webviews/contact');
+});
 
 
 
 
 //add admin
 include('admin.php');
-
-
