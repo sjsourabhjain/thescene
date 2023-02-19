@@ -53,5 +53,6 @@ Route::get('/contact-us', function() {
 });
 
 Route::get('/events',[EventController::class,'index'])->name('events');
+Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');
 //add admin
 include('admin.php');
