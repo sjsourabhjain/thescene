@@ -25,7 +25,8 @@ class UserController extends Controller
 
         try{
             if(Auth::attempt(["email"=>$request->email,'password'=>$request->password])){
-                return redirect()->route('game');
+                echo "you are login successfully";
+                //return redirect()->route('/');
             }else{
             }
 
