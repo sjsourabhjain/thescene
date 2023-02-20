@@ -43,11 +43,11 @@
                 </li>
                 @endcan
                 @can('order')
-                <li class="nav-item {{ (request()->is('admin/*order*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Order </a>
+                {{-- <li class="nav-item {{ (request()->is('admin/*order*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Order </a>
                     <ul class="sub-menu">
                         <li class="nav-item {{ (request()->is('admin/list-order')) ? 'active' : '' }}"><a href="{{ route('admin.list_order') }}" class="nav-link">{{__('level.list')}}</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 @endcan
                 @can('setting')
                 <li class="nav-item {{ (request()->is('admin/*setting*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Setting </a>
