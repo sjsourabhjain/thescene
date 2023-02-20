@@ -45,6 +45,7 @@ class ProductController extends Controller
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
+    
     /**
      * Show the form for creating a new resource.
      *

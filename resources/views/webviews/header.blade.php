@@ -14,7 +14,7 @@
     <meta name="generator" content="Themefisher Small Apps Template v1.0">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/site_logo.png') }}" />
 
     <!-- PLUGINS CSS STYLE -->
     <link rel="stylesheet" href="{{asset('assets-front/plugins/bootstrap/bootstrap.min.css')}}">

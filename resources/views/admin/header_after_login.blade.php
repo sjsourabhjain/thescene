@@ -5,7 +5,7 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=0" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Dashboard</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon.ico') }}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/site_logo.png') }}" sizes="32x32" />
     <link href="{{ asset('css/admin/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/admin/fontawesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet" type="text/css">

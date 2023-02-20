@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <a href="{{ route('admin.dashboard') }}" class="navbar-brand mr-0 mr-md-2 logo">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo">
+        <h3><img src="{{ asset('assets/site_logo.png') }}" alt="Logo"> &nbsp;<span style="color:black;">The Scene</span></h3>
     </a>
 
     <ul class="navbar-nav flex-row ml-auto d-flex align-items-center list-unstyled topnav-menu mb-0">

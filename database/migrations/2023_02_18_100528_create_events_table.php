@@ -23,6 +23,8 @@ class CreateEventsTable extends Migration
             $table->string("tags")->nullable();
             $table->string("city", 100)->nullable();
             $table->string("location")->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->string("amount_status", 10)->nullable(); 
             $table->string("link")->nullable();
             $table->string("start_datetime", 50)->nullable();
             $table->string("end_datetime", 50)->nullable();
