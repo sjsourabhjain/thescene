@@ -19,10 +19,10 @@
                         @if(Session::has('message'))
                         <x-alert type="{!! session('message')[0] !!}" indication="{!! session('message')[1] !!}" message="{!! session('message')[2]!!}"/>
                         @endif
-                        <form action="login" method="post">
+                        <form action="login" method="post" action="{{route('login')}}">
                             @csrf
                             <!-- Username -->
-                            <input class="form-control main adjust" type="text" name="username" placeholder="Username" required>
+                            <input class="form-control main adjust" type="text" name="email" placeholder="Username" required>
 
                             <!-- Password -->
                             <div class="password-container">
