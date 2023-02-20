@@ -54,6 +54,9 @@ Route::get('/contact-us', function() {
 Route::get('/sell-ticket', function() {
   return view('webviews/sell-ticket');
 });
+Route::get('/register', function() {
+  return view('webviews/register');
+});
 
 Route::get('/events',[EventController::class,'index'])->name('events');
 Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');
