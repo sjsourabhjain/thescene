@@ -6,7 +6,7 @@
     <!-- Basic Page Needs
   ================================================== -->
     <meta charset="utf-8">
-    <title>{{ $event->event_title }}</title>
+    <title>{{ $event->title }}</title>
 
     <!-- Mobile Specific Metas
   ================================================== -->

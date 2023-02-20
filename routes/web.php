@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OtherController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,9 +51,11 @@ Route::get('/terms-conditions', function() {
 Route::get('/contact-us', function() {
   return view('webviews/contact');
 });
+Route::get('/sell-ticket', function() {
+  return view('webviews/sell-ticket');
+});
 
-
-
-
+Route::get('/events',[EventController::class,'index'])->name('events');
+Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');
 //add admin
 include('admin.php');

@@ -61,10 +61,10 @@
                     </li>
 
                     <li class="nav-item @@about">
-                        <a class="nav-link" href="create-event.html">Create an event</a>
+                        <a class="nav-link" href="/create-event">Create an event</a>
                     </li>
                     <li class="nav-item @@contact">
-                        <a class="nav-link" href="/contact">Contact</a>
+                        <a class="nav-link" href="/contact-us">Contact</a>
                     </li>
                 @if (Session('user'))
                     <li class="nav-item dropdown ">

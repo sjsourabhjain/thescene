@@ -1,4 +1,4 @@
-@include('user/header')
+@include('webviews/header')
 <section class="privacy section pt-0">
     <div class="container">
         <div class="row">
@@ -23,7 +23,7 @@
                                     value="ENGLISHMX4D"> <span class="tn-checkbox"></span> <span
                                     class="tn-label">ENGLISHMX4D</span></label></li>
                     </ul>
-                </div> --}}
+                </div>--}}
                     <div class="filter-category tn-entity-filter-category">
                         <h5>Categories</h5>
 
@@ -38,7 +38,7 @@
                         </ul>
                     </div>
                 </form>
-                {{-- <div class="filter-category tn-entity-filter-category">
+                {{--<div class="filter-category tn-entity-filter-category">
                     <h5>Day</h5>
                     <ul id="ulLanguageFilter" class="category-filters">
                         <li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter"
@@ -116,17 +116,17 @@
                             <article class="post-sm">
                                 <!-- Post Image -->
                                 <div class="post-thumb">
-                                    <a href="event-details/{{ $event->event_slug }}/{{ $event->id }}"><img class="w-100"
-                                            src="{{ asset('storage/' . $event->event_poster_img) }}"
+                                    <a href="event-details/{{ $event->slug }}/{{ $event->id }}"><img class="w-100"
+                                            src="{{ asset('storage/' . $event->image) }}"
                                             alt="Post-Image"></a>
                                 </div>
                                 <!-- Post Title -->
                                 <div class="post-title">
-                                    <h3><a href="#">{{ $event->event_title }}</a></h3>
+                                    <h3><a href="#">{{ $event->title }}</a></h3>
                                 </div>
-                                <p class="post-date">{{ date('D, F d', strtotime($event->event_start_at)) }}</p>
+                                <p class="post-date">{{ date('D, F d', strtotime($event->start_datetime)) }}</p>
                                 <div class="post-details">
-                                    <p>{{ $event->event_location }}<br />
+                                    <p>{{ $event->location }}<br />
                                         Free</p>
                                 </div>
                             </article>
@@ -137,7 +137,7 @@
         </div>
     </div>
 </section>
-{{ $events->onEachSide(2)->appends(request()->all())->links('pagination::event_pagination') }}
+{{-- $events->onEachSide(2)->appends(request()->all())->links('pagination::event_pagination') --}}
 <!--====  End of Privacy Policy  ====-->
 {{-- <section class="privacy section pt-0">
     <div class="container">
@@ -167,4 +167,4 @@
     }
 </script>
 
-@include('user/footer')
+@include('webviews/footer')
