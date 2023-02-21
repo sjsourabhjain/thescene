@@ -55,44 +55,11 @@ class UserController extends Controller
             $user->full_name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->role_id = 2;
+            $user->role_id = 3;
             $user->save();
-            return redirect()->route('game');
+            return redirect()->route('login');
         }catch(\Exception $e){
             echo $e->getMessage();die;
-        }
-    }
-
-    public function game(){
-        return view('game');
-    }
-    public function about(){
-        return view('about');
-    }
-    public function wallet(){
-        return view('wallet');
-    }
-    public function checkBalance(Request $request){
-        $validator = Validator::make($request->all(),[
-            'amt'  => 'required',
-        ]);
-
-        if($validator->fails()){
-            return response()->json([
-                'status_code' => 400,
-                'response' => 'error',
-                'message' => $validator->messages()->first(),
-            ]);
-        }
-        try{
-            dd(Auth::user());
-            $user_id = Auth::user()->id;
-            dd(Auth::user());
-            $checkBalance = User::where('id',$user_id)->first();
-            dd($checkBalance);
-        }
-        catch(\Exception $e){
-
         }
     }
 }
