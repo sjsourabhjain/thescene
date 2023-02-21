@@ -19,22 +19,23 @@ class EventController extends Controller
     public function __construct(){
         
     }
+
     public function index(Request $request){
         try{
-            $data["events"] = Event::latest()->get();
+            $data["events"] = Event::orderby('id', 'desc')->get();
             if ($request->ajax()) {
                 return Datatables::of($data["events"])
                         ->addIndexColumn()
                         ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.show_Event',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
-                            $btn .= '<a href="'.route('admin.edit_Event',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            $btn = '<a href="'.route('admin.show_event',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.edit_event',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
                             $btn .= '<a href="'.route('admin.manage_variants',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-box"></i></button></a>';
                             return $btn;
                         })
                         ->rawColumns(['action'])
                         ->make(true);
             }
-            return view('admin.events.list_Event');
+            return view('admin.events.list_event');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -48,7 +49,7 @@ class EventController extends Controller
     public function create(){
         try{
             $data["categories"] = Category::latest()->get();
-            return view('admin.events.add_Event',$data);
+            return view('admin.events.add_event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -76,7 +77,7 @@ class EventController extends Controller
             if(!empty($request->category_id)){
                 foreach($request->category_id as $category){
                     EventCategory::create([
-                        "Event_id"=>$Event_details->id,
+                        "id"=>$Event_details->id,
                         "category_id"=>$category
                     ]);
                 }
@@ -85,13 +86,13 @@ class EventController extends Controller
             if(!empty($request->variants)){
                 foreach($request->variants as $variant){
                     EventVariant::create([
-                        "Event_id"=>$Event_details->id,
+                        "id"=>$Event_details->id,
                         "variant_id"=>$variant
                     ]);
                 }
             }
 
-            return redirect()->route('admin.list_Event')->with('success','Event Added Successfully.');
+            return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -106,7 +107,7 @@ class EventController extends Controller
     public function show($id){
         try{
             $data["Event_details"] = Event::where(["id"=>$id])->with("variants","categories")->first();
-            return view('admin.events.show_Event',$data);
+            return view('admin.events.show_event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -123,7 +124,7 @@ class EventController extends Controller
             $data["variants"] = Variant::latest()->get();
             $data["categories"] = Category::latest()->get();
             $data["Event_details"] = Event::where(["id"=>$id])->with("variants","categories")->first();
-            return view('admin.events.edit_Event',$data);
+            return view('admin.events.edit_event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -153,10 +154,10 @@ class EventController extends Controller
             $Event_details = Event::where(["id"=>$request->update_id])->update($update_arr);
 
             if(!empty($request->category_id)){
-                EventCategory::where(["Event_id"=>$request->update_id])->delete();
+                EventCategory::where(["id"=>$request->update_id])->delete();
                 foreach($request->category_id as $category){
                     EventCategory::create([
-                        "Event_id"=>$request->update_id,
+                        "id"=>$request->update_id,
                         "category_id"=>$category
                     ]);
                 }
@@ -178,7 +179,7 @@ class EventController extends Controller
                 EventVariantCombinationDetails::where(["Event_id"=>$request->update_id])->whereNotIn("variant_id",$variants_arr)->delete();
             }
 
-            return redirect()->route('admin.list_Event')->with('success','Event Updated Successfully.');
+            return redirect()->route('admin.list_event')->with('success','Event Updated Successfully.');
         }catch(\Exception $e){
             echo $e->getMessage(); die;
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
@@ -212,7 +213,7 @@ class EventController extends Controller
     public function manage_Event_variant_images($comb_id,$Event_id){
         try{
             $data["images"] = EventVariantImage::where(["comb_id"=>$comb_id,"Event_id"=>$Event_id])->latest()->get();
-            return view('admin.events.manage_Event_variant_images',$data);
+            return view('admin.events.manage_event_variant_images',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -234,13 +235,13 @@ class EventController extends Controller
             $file = $request->file('Event_variant_image');
             $originalname = $file->getClientOriginalName();
             $file_name = time()."_".$originalname;
-            $file->move('uploads/Event_variant_images/',$file_name);
-            $Event_variant_image = "Event_variant_images/".$file_name;
+            $file->move('uploads/event_variant_images/',$file_name);
+            $Event_variant_image = "event_variant_images/".$file_name;
             
             $request->request->add(['image_name' => $Event_variant_image]);
 
             EventVariantImage::create($request->all());
-            return redirect()->route('admin.manage_Event_variant_images',['comb_id'=>$request->comb_id,'Event_id'=>$request->Event_id])->with('success','Event Variant Image added Successfully.');
+            return redirect()->route('admin.manage_event_variant_images',['comb_id'=>$request->comb_id,'id'=>$request->Event_id])->with('success','Event Variant Image added Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -350,7 +351,7 @@ class EventController extends Controller
             $EventImageQuery->delete();
             unlink(public_path("/uploads/".$details->image_name));
             
-            return redirect()->route('admin.manage_Event_variant_images',['comb_id'=>$details->comb_id,'Event_id'=>$details->Event_id])->with('success','Event Variant Image removed Successfully.');
+            return redirect()->route('admin.manage_Event_variant_images',['comb_id'=>$details->comb_id,'id'=>$details->Event_id])->with('success','Event Variant Image removed Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

@@ -17,7 +17,8 @@
 						<!-- Email -->
 						<div class="col-md-6 mb-2">
 							<!--<p class="p-fo-si">Email address to whome you sell ticket</p>-->
-							<input class="form-control main" type="email" placeholder="Event Date & Time" required>
+							<small>Event Date & Time</small>
+							<input class="form-control main" type="datetime-local" placeholder="Event Date & Time" required>
 						</div>
 						
 						<div class="col-md-6 mb-2">
@@ -30,20 +31,20 @@
 						
 						<div class="col-md-6 mb-2">
 							<select name="Type" id="tick-type">
-	<option value="0">Ticket Category</option>							 
-    <option value="1">General Admission</option>
-    <option value="2">VIP</option>
-  </select>
+								<option value="">Ticket Category</option>							 
+								<option value="0">General Admission</option>
+								<option value="1">VIP</option>
+							</select>
 						</div>
 						
 						<div class="col-md-6 mb-2 upl-adj">
-							<i class="fa fa-upload" aria-hidden="true"></i>
-							<input class="form-control main upl" type="text" placeholder="Upload an image" required>
+							<i class="fa fa-upload" aria-hidden="true"> Image </i>
+							<input class="form-control main upl" type="file" placeholder="Upload an image" required>
 						</div>
 						
 						<div class="col-md-6 mb-2 upl-adj">
 							<i class="fa fa-dollar" aria-hidden="true"></i>
-							<input class="form-control main upl" type="text" placeholder="Price" required>
+							<input class="form-control main upl" type="number" placeholder="Ticket Price" required>
 						</div>
 						
 						<p class="p-fo-si">Personal Details :</p>
@@ -53,7 +54,7 @@
 						</div>
 						
 						<div class="col-md-6 mb-2">
-							<input class="form-control main" type="text" placeholder="Email" required>
+							<input class="form-control main" type="email" placeholder="Email" required>
 						</div>
 						
 						<div class="col-md-6 mb-2">
@@ -71,7 +72,7 @@
 						</div>
 						
 						<div class="col-md-6 mb-2">
-							<input class="form-control main" type="text" placeholder="Account Number" required>
+							<input class="form-control main" type="number" placeholder="Account Number" required>
 						</div>
 						
 						<div class="col-md-6 mb-2">

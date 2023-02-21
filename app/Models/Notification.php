@@ -16,7 +16,6 @@ class Notification extends Model
      */
     protected $fillable = [
         
-        'id',
         'name',
         'status',
         'track'

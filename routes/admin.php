@@ -62,7 +62,8 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     Route::get('/update-slider-status/{id}','SliderController@update_slider_status')->name('update_slider_status');
     Route::get('/delete-slider/{id}','SliderController@destroy')->name('delete_slider');
 
-    /* Product module*/
+
+    /* event module*/
     Route::get('/list-events','EventController@index')->name('list_events'); 
     Route::get('/create-event','EventController@create')->name('create_events');
     Route::post('/store-event','EventController@store')->name('store_event');
@@ -70,6 +71,8 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     Route::get('/edit-event/{id}','EventController@edit')->name('edit_event');
     Route::post('/update-event','EventController@update')->name('update_event');
     Route::delete('/delete-event/{id}','EventController@destroy')->name('delete_event');
+
+
 
     /* offer module*/
     Route::get('/list-offer','OfferController@index')->name('list_offer');
@@ -98,4 +101,5 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     Route::post('/update-setting','SettingController@update')->name('update_setting');
     Route::get('/edit-settings','SettingController@edit_settings')->name('edit_settings');
     Route::post('/update-settings','SettingController@update_settings')->name('update_settings');
+    
 });

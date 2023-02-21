@@ -50,7 +50,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
 
                     <li class="nav-item @@about">
@@ -86,7 +86,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li>
                         <div class="col-12 text-right">
-                            <button class="btn btn-main-md"><a href="sell-ticket.html">Sell Ticket</a></button>
+                            <button class="btn btn-main-md"><a href="sell-ticket">Sell Ticket</a></button>
                         </div>
                     </li>
                 </ul>

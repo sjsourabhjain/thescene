@@ -8,5 +8,5 @@ use Illuminate\Notifications\Notifiable;
 
 class Country extends Authenticatable
 {
-	
+	//
 }

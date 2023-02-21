@@ -22,12 +22,9 @@
         <div class="row align-items-center">
             <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
                 <h1 class="text-white font-weight-bold mb-4">Welcome To The Scene</h1>
-                <p class="text-white mb-5">The Scene is a promotion company that is more like a community that has
-                    formed to promote the music shows that The Scene puts on. This is done by
-                    the community members posting event-links of the shows on their social
-                    media handles and all over the internet. The Scene pays a commission to its
-                    members for each sale made from the links they post.
-                    </p>
+                <p class="text-white mb-5">
+                    The Scene is an entertainment promotion company that operates as a for-profit charity organization that has formed a community of members to promote the live music shows and other events that The Scene puts on and donates to charity from each event's total revenue to good causes. This is done by the community members posting event-links (e-Links) for ticket sales to the events on their social media handles and all over the internet. The Scene pays a commission to its community members for each sale made from the e-Links they post.
+                </p>
                 <p class="text-white mb-5"></p>
                 <a href="FAQ.html" class="btn btn-main-md" style="background: #000000;">Book Tickets</i></a>
             </div>
@@ -93,10 +90,9 @@
                     <!-- Feature Title -->
                     <h2>New Member</a></h2>
                     <!-- Feature Description -->
-                    <p class="desc">I am a new memberWe want you! Join the fun of making money and getting to go to shows that
-                        always have a lot of people because of your effort. Also; yes a lot of
-                        girls have joined and are going to be there. We guessed you were
-                        probably thinking about that.</p>
+                    <p class="desc">
+                        We want you! Join the fun of making easy money, helping good causes and getting to go to shows that are always packed because of your effort. That sounds like a win, win, win, and lots of more wins proposition to us. Join today and promote alongside the best professional promoters of live music events ever. The Scene thinks that the community could even achieve the almost impossible level in business of being professional at being a professional. It doesn't get any more serious than that. Right?
+                    </p>
                 </div>
                 <!-- Testimonial Quote -->
 

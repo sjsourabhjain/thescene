@@ -64,5 +64,7 @@ Route::post('login',[UserController::class,'login'])->name('login');
 Route::post('register',[UserController::class,'register'])->name('register');
 Route::get('/events',[EventController::class,'index'])->name('events');
 Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');
+
+
 //add admin
 include('admin.php');

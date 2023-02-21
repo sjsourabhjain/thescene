@@ -25,9 +25,9 @@
 
                         <!-- links -->
                         <ul>
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li><a href="/about-us">About</a></li>
-                            <li><a href="#">Events</a></li>
+                            <li><a href="/events">Events</a></li>
                             <li><a href="/terms-conditions">Terms & Conditions</a></li>
                             <li><a href="/privacy-policy">Privacy Policy</a></li>
                         </ul>

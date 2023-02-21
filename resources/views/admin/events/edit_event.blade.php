@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3 text-center">
-                                <a type="submit" href="{{ route('admin.list_product') }}" class="btn light">Cancel</a>
+                                <a type="submit" href="{{ route('admin.list_events') }}" class="btn light">Cancel</a>
                                 <button type="submit" class="btn light">Submit</button>
                             </div>
                         </div>

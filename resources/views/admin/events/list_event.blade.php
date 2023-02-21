@@ -71,7 +71,7 @@
     var table = $('#dataTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.list_product') }}",
+        ajax: "{{ route('admin.list_events') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'product_name', name: 'product_name'},
