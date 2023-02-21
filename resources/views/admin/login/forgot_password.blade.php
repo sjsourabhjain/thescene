@@ -3,11 +3,11 @@
     <div class="login-page">
         <div class="login-box">
             <div class="contentBox">
-                <div class="logo d-flex flex-wrap w-100">
-                    <img src="{{ asset('images/logo.png') }}" alt="logo">
+                <div class="logo w-100 text-center">
+                    <img src="{{ asset('assets/site_logo.png') }}" alt="logo">
                 </div>
-                <h1>Reset Password</h1>
-                <p>Enter your email address and we'll send you an email with instructions to reset your password.</p>
+                <h3 class="text-center">Reset Password</h3>
+                <p class="text-cnter">Enter your email address and we'll send you an email with instructions to reset your password.</p>
                 @include('flash-message')
                 <form class="mt-5" method="POST" action="{{ route('admin.send_verification_email') }}">
                     @csrf

@@ -3,11 +3,10 @@
     <div class="login-page">
         <div class="login-box">
             <div class="contentBox">
-                <div class="logo d-flex flex-wrap w-100">
-                    <img src="{{ asset('images/logo.png') }}" alt="logo">
+                <div class="logo w-100 text-center">
+                    <img src="{{ asset('assets/site_logo.png') }}" alt="logo">
                 </div>
-                <h1>Welcome to Craft-Affair!</h1>
-                <p>Enter your email address and password to access admin panel.</p>
+                <p class="text-center">Enter your email address and password to access admin panel.</p>
                 @include('flash-message')
                 <form class="mt-4" method="POST" action="{{ route('admin.login') }}">
                     @csrf

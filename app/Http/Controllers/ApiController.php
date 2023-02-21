@@ -11,21 +11,22 @@ use App\Models\UserAddresses;
 use App\Helpers\Helper;
 use JWTAuth;
 use JWTAuthException;
-use DB;
 
 class ApiController extends Controller
 {
     public function register(Request $request){
-        //Validate data
 
+        //Validate data
         $validator = Validator::make($request->all(),[
             'mob_no'     => 'required|numeric',
-            'email'  => 'nullable|string',
-            'password'=> 'required|string',
+            'email'  => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+            'role' => 'required|numeric'
         ],[],[
-            'email'=>'Email',
-            'mob_no'=>'Mobile No.',
-            'password'=>'Password'
+            'email'=> 'Email',
+            'mob_no'=> 'Mobile No.',
+            'password'=> 'Password',
+            'role' => 'Role is required'
         ]);
 
         //Send failed response if request is not valid
@@ -56,7 +57,6 @@ class ApiController extends Controller
                 ]);
 
                 //Helper::sendOTP($request->mob_no,$otp);
-
                 return response()->json([
                     'status' => true,
                     'message' => 'User created successfully',
@@ -68,9 +68,9 @@ class ApiController extends Controller
                 User::create([
                     'email' => $request->email,
                     'mob_no'=>$request->mob_no,
-                    'otp'=>$otp,
-                    'role_id'=>4,
-                    'password' => bcrypt($request->password)
+                    'otp'=>$otp, //static
+                    'role_id'=>$request->role,
+                    'password' => Hash::make($request->password)
                 ]);
 
                 //Helper::sendOTP($request->mob_no,$otp);
@@ -90,6 +90,8 @@ class ApiController extends Controller
             ]);
         }
     }
+
+
     public function forget_password(Request $request){
         //Validate data
 
@@ -337,13 +339,13 @@ class ApiController extends Controller
     }
     public function categoryList(Request $request){
         try{
-            $main_categories = Category::where(["parent_id"=>0])->latest()->get();
+            $main_categories = Category::where(["parent_id"=>0])->orderby('id', 'desc')->get();
             $categoryArr = [];
             if(!empty($main_categories)){
                 foreach($main_categories as $main_category){
                     $sub_cats = [];
                     
-                    $sub_categories = Category::where(["parent_id"=>$main_category->id])->latest()->get();
+                    $sub_categories = Category::where(["parent_id"=>$main_category->id])->orderby('id', 'desc')->get();
                     if(!empty($sub_categories)){
                         foreach($sub_categories as $sub_category){
                             $sub_cats[] = [
@@ -356,7 +358,7 @@ class ApiController extends Controller
                     $categoryArr[] = [
                         "category_id"=>$main_category->id,
                         "category_name"=>$main_category->category_name,
-                        "sub_categories"=>$sub_cats
+                        // "sub_categories"=>$sub_cats
                     ];
                 }
             }
@@ -374,7 +376,9 @@ class ApiController extends Controller
             ]);
         }     
     }
+
     public function userProfile(Request $request){
+
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric'
         ],[],[
@@ -387,6 +391,7 @@ class ApiController extends Controller
                 'data'=> []
             ]);
         }
+
         try{
             $data = User::where('id',$request->user_id)->first();
             return response()->json([
@@ -403,7 +408,9 @@ class ApiController extends Controller
             ]);
         }
     }
+
     public function userAddresses(Request $request){
+
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric'
         ],[],[
@@ -416,6 +423,7 @@ class ApiController extends Controller
                 'data'=> []
             ]);
         }
+
         try{
             $data = UserAddresses::select(['id','title'])->where('user_id',$request->user_id)->get();
             return response()->json([
@@ -430,9 +438,10 @@ class ApiController extends Controller
                 'data'=>[]
             ]);
         }
-        dd("hello");
     }
+    
     public function store_user_address(Request $request){
+
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric',
             'title' => 'required',
@@ -461,6 +470,7 @@ class ApiController extends Controller
                 'data'=> []
             ]);
         }
+
         try{
             $data = UserAddresses::create($request->all());
             return response()->json([
@@ -477,11 +487,13 @@ class ApiController extends Controller
             ]);
         }
     }
+
     public function update_profile(Request $request){
+
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric',
             'full_name' => 'required',
-            'email' => 'required',
+            // 'email' => 'required|email',
             'mob_no' => 'required'
         ],[],[
             'user_id' => 'User ID',
@@ -496,19 +508,35 @@ class ApiController extends Controller
                 'data'=> []
             ]);
         }
+
         try{
-            User::where(["id"=>$request->user_id])->update([
-                "full_name"=>$request->full_name
-            ]);
-            return response()->json([
-                'status' => true,
-                'message' => 'Profile Updated Successfully',
-                'data'=>[]
-            ]);
+
+            $user = User::find($request->user_id);
+            if(!empty($user))
+            {
+                User::where(["id"=>$request->user_id])->update([
+                    "full_name"=>$request->full_name,
+                    "mob_no" => $request->mob_no
+                ]);
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Profile Updated Successfully',
+                    'data'=>[]
+                ]); 
+
+            }else{
+
+                return response()->json([
+                    'status' => false,
+                    'message' => 'No user found',
+                    'data'=>[]
+                ]); 
+            }
+
         }catch(Exception $e){
             return response()->json([
                 'status' => false,
-                'message' => ERROR_MSG,
+                'message' => ERROR_MSG.$e,
                 'data'=>[]
             ]);
         }

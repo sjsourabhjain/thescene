@@ -3,10 +3,10 @@
     <div class="login-page">
         <div class="login-box">
             <div class="contentBox">
-                <div class="logo d-flex flex-wrap w-100">
-                    <img src="{{ asset('images/logo.png') }}" alt="logo">
+                <div class="logo w-100 text-center">
+                    <img src="{{ asset('assets/site_logo.png') }}" alt="logo">
                 </div>
-                <h1>Reset Password</h1>
+                <h3 class="text-center">Reset Password</h3>
                 @include('flash-message')
                 <form class="mt-5" method="POST" action="{{ route('admin.reset',$token) }}">
                     @csrf

@@ -41,8 +41,9 @@ class LoginController extends Controller
             return redirect()->route('admin.login')->with('error',ERROR_MSG);
         }
     }
+
     public function login(Request $request){
-        //dd("login");
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -58,6 +59,7 @@ class LoginController extends Controller
             return redirect()->route('admin.home')->with('error',ERROR_MSG);
         }
     }
+
     public function forgot_password(){
         try{
             return view('admin.login.forgot_password');
@@ -65,8 +67,8 @@ class LoginController extends Controller
             return redirect()->route('admin.home')->with('error',ERROR_MSG);
         }
     }
+
     public function send_verification_email(request $request){
-        //dd("send");
         $request->validate([
             'email' => 'required|email|exists:users',
         ]);
@@ -113,6 +115,7 @@ class LoginController extends Controller
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
         ]);
+
         try{
             $updatePassword = DB::table('password_resets')
                 ->where(['email' => $request->email, 'token' => $request->token])
@@ -130,6 +133,7 @@ class LoginController extends Controller
             return redirect()->route('admin.home')->with('error',ERROR_MSG);
         }
     }
+
     public function logout(){
         try{
             Auth::guard('admin')->logout();
@@ -140,4 +144,5 @@ class LoginController extends Controller
         }
     }
 }
+
 ?>
