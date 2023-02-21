@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Event;
 use App\Models\UserAddresses;
 use App\Helpers\Helper;
 use JWTAuth;
@@ -542,5 +543,13 @@ class ApiController extends Controller
         }
     }
 
+    public function eventsList(Request $request){
+        $data = Event::where('status',1)->get();
+        return response()->json([
+                'status' => true,
+                'message' => 'Event List fetch successfully.',
+                'data'=>$data
+            ]);
+    }
 }
 ?>

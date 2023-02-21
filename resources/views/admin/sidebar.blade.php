@@ -34,15 +34,12 @@
                     </ul>
                 </li>
                 @endcan
-                
-                @can('events')
                 <li class="nav-item {{ (request()->is('admin/*events*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> events </a>
                     <ul class="sub-menu">
                         <li class="nav-item {{ (request()->is('admin/list-events')) ? 'active' : '' }}"><a href="{{ route('admin.list_events') }}" class="nav-link">{{__('level.list')}}</a></li>
                         <li class="nav-item {{ (request()->is('admin/create-events')) ? 'active' : '' }}"><a href="{{ route('admin.create_events') }}" class="nav-link">{{__('level.add')}}</a></li>
                     </ul>
                 </li>
-                @endcan
                 
                 @can('order')
                 {{-- <li class="nav-item {{ (request()->is('admin/*order*')) ? 'active' : '' }}"><a href="#" class="nav-link"><i class="fal fa-file-alt"></i> Order </a>

@@ -5,17 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
-use App\Models\Variant;
-use App\Models\Product;
+use App\Models\Event;
 use App\Models\Category;
-use App\Models\ProductVariant;
-use App\Models\ProductCategory;
-use App\Models\ProductVariantImage;
-use App\Models\ProductVariantCombination;
-use App\Models\ProductVariantCombinationDetails;
 use DataTables;
 
-class ProductController extends Controller
+class EventController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,20 +21,20 @@ class ProductController extends Controller
     }
     public function index(Request $request){
         try{
-            $data["products"] = Product::latest()->get();
+            $data["events"] = Event::latest()->get();
             if ($request->ajax()) {
-                return Datatables::of($data["products"])
+                return Datatables::of($data["events"])
                         ->addIndexColumn()
                         ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.show_product',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
-                            $btn .= '<a href="'.route('admin.edit_product',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            $btn = '<a href="'.route('admin.show_Event',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.edit_Event',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
                             $btn .= '<a href="'.route('admin.manage_variants',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-box"></i></button></a>';
                             return $btn;
                         })
                         ->rawColumns(['action'])
                         ->make(true);
             }
-            return view('admin.products.list_product');
+            return view('admin.events.list_Event');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -53,9 +47,8 @@ class ProductController extends Controller
      */
     public function create(){
         try{
-            $data["variants"] = Variant::latest()->get();
             $data["categories"] = Category::latest()->get();
-            return view('admin.products.add_product',$data);
+            return view('admin.events.add_Event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -68,22 +61,22 @@ class ProductController extends Controller
      */
     public function store(Request $request){
         $validator = $request->validate([
-            'product_name'     => 'required|string|max:250',
-            'product_sku_id'     => 'required',
+            'Event_name'     => 'required|string|max:250',
+            'Event_sku_id'     => 'required',
             'category_id'     => 'required'
         ],[],[
-            'product_name'=>'Product Name',
-            'product_sku_id'=>'Product SKU ID',
+            'Event_name'=>'Event Name',
+            'Event_sku_id'=>'Event SKU ID',
             'category_id'=>'Category'
         ]);
 
         try{
-            $product_details = Product::create($request->all());
+            $Event_details = Event::create($request->all());
 
             if(!empty($request->category_id)){
                 foreach($request->category_id as $category){
-                    ProductCategory::create([
-                        "product_id"=>$product_details->id,
+                    EventCategory::create([
+                        "Event_id"=>$Event_details->id,
                         "category_id"=>$category
                     ]);
                 }
@@ -91,14 +84,14 @@ class ProductController extends Controller
 
             if(!empty($request->variants)){
                 foreach($request->variants as $variant){
-                    ProductVariant::create([
-                        "product_id"=>$product_details->id,
+                    EventVariant::create([
+                        "Event_id"=>$Event_details->id,
                         "variant_id"=>$variant
                     ]);
                 }
             }
 
-            return redirect()->route('admin.list_product')->with('success','Product Added Successfully.');
+            return redirect()->route('admin.list_Event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -112,8 +105,8 @@ class ProductController extends Controller
      */
     public function show($id){
         try{
-            $data["product_details"] = Product::where(["id"=>$id])->with("variants","categories")->first();
-            return view('admin.products.show_product',$data);
+            $data["Event_details"] = Event::where(["id"=>$id])->with("variants","categories")->first();
+            return view('admin.events.show_Event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -129,8 +122,8 @@ class ProductController extends Controller
         try{
             $data["variants"] = Variant::latest()->get();
             $data["categories"] = Category::latest()->get();
-            $data["product_details"] = Product::where(["id"=>$id])->with("variants","categories")->first();
-            return view('admin.products.edit_product',$data);
+            $data["Event_details"] = Event::where(["id"=>$id])->with("variants","categories")->first();
+            return view('admin.events.edit_Event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
@@ -145,25 +138,25 @@ class ProductController extends Controller
      */
     public function update(Request $request){
         $validator = $request->validate([
-            'product_name'     => 'required|string|max:250',
-            'product_sku_id'     => 'required',
+            'Event_name'     => 'required|string|max:250',
+            'Event_sku_id'     => 'required',
             'category_id'     => 'required'
         ],[],[
-            'product_name'=>'Product Name',
-            'product_sku_id'=>'Product SKU ID',
+            'Event_name'=>'Event Name',
+            'Event_sku_id'=>'Event SKU ID',
             'category_id'=>'Category'
         ]);
 
         try{
-            $update_arr["product_name"] = $request->product_name;
-            $update_arr["product_sku_id"] = $request->product_sku_id;
-            $product_details = Product::where(["id"=>$request->update_id])->update($update_arr);
+            $update_arr["Event_name"] = $request->Event_name;
+            $update_arr["Event_sku_id"] = $request->Event_sku_id;
+            $Event_details = Event::where(["id"=>$request->update_id])->update($update_arr);
 
             if(!empty($request->category_id)){
-                ProductCategory::where(["product_id"=>$request->update_id])->delete();
+                EventCategory::where(["Event_id"=>$request->update_id])->delete();
                 foreach($request->category_id as $category){
-                    ProductCategory::create([
-                        "product_id"=>$request->update_id,
+                    EventCategory::create([
+                        "Event_id"=>$request->update_id,
                         "category_id"=>$category
                     ]);
                 }
@@ -171,21 +164,21 @@ class ProductController extends Controller
 
             $variants_arr = [];
             if(!empty($request->variants)){
-                ProductVariant::where(["product_id"=>$request->update_id])->delete();
+                EventVariant::where(["Event_id"=>$request->update_id])->delete();
                 foreach($request->variants as $variant){
                     $variants_arr[] = $variant;
-                    ProductVariant::create([
-                        "product_id"=>$request->update_id,
+                    EventVariant::create([
+                        "Event_id"=>$request->update_id,
                         "variant_id"=>$variant
                     ]);
                 }
             }
 
             if(!empty($variants_arr)){
-                ProductVariantCombinationDetails::where(["product_id"=>$request->update_id])->whereNotIn("variant_id",$variants_arr)->delete();
+                EventVariantCombinationDetails::where(["Event_id"=>$request->update_id])->whereNotIn("variant_id",$variants_arr)->delete();
             }
 
-            return redirect()->route('admin.list_product')->with('success','Product Updated Successfully.');
+            return redirect()->route('admin.list_Event')->with('success','Event Updated Successfully.');
         }catch(\Exception $e){
             echo $e->getMessage(); die;
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
@@ -200,66 +193,66 @@ class ProductController extends Controller
      */
     public function destroy($id){
         try{
-            Product::where(["id"=>$id])->delete();
-            return redirect()->route('admin.list_product')->with('success','Product Deleted Successfully.');
+            Event::where(["id"=>$id])->delete();
+            return redirect()->route('admin.list_Event')->with('success','Event Deleted Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
     public function manage_variants($id){
         try{
-            $data["product_details"] = Product::where(["id"=>$id])->first();
-            $data["product_variants"] = ProductVariant::where(["product_id"=>$id])->with("variantDetails")->get();
-            $data["combinations"] = ProductVariantCombination::where(["product_id"=>$id])->with("combinationDetails")->latest()->get();
-            return view('admin.products.manage_variants',$data);
+            $data["Event_details"] = Event::where(["id"=>$id])->first();
+            $data["Event_variants"] = EventVariant::where(["Event_id"=>$id])->with("variantDetails")->get();
+            $data["combinations"] = EventVariantCombination::where(["Event_id"=>$id])->with("combinationDetails")->latest()->get();
+            return view('admin.events.manage_variants',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
-    public function manage_product_variant_images($comb_id,$product_id){
+    public function manage_Event_variant_images($comb_id,$Event_id){
         try{
-            $data["images"] = ProductVariantImage::where(["comb_id"=>$comb_id,"product_id"=>$product_id])->latest()->get();
-            return view('admin.products.manage_product_variant_images',$data);
+            $data["images"] = EventVariantImage::where(["comb_id"=>$comb_id,"Event_id"=>$Event_id])->latest()->get();
+            return view('admin.events.manage_Event_variant_images',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
-    public function store_product_variant_images(Request $request){
+    public function store_Event_variant_images(Request $request){
         $validator = $request->validate([
             'comb_id'    => 'required|numeric',
-            'product_id'    => 'required|numeric',
-            'product_variant_image'     => 'required|image'
+            'Event_id'    => 'required|numeric',
+            'Event_variant_image'     => 'required|image'
         ],[],[
             'comb_id'=>'Combination ID',
-            'product_id'=>'Product ID',
-            'product_variant_image'=>'Image',
+            'Event_id'=>'Event ID',
+            'Event_variant_image'=>'Image',
         ]);
 
         try{
-            $product_variant_image = '';
+            $Event_variant_image = '';
 
-            $file = $request->file('product_variant_image');
+            $file = $request->file('Event_variant_image');
             $originalname = $file->getClientOriginalName();
             $file_name = time()."_".$originalname;
-            $file->move('uploads/product_variant_images/',$file_name);
-            $product_variant_image = "product_variant_images/".$file_name;
+            $file->move('uploads/Event_variant_images/',$file_name);
+            $Event_variant_image = "Event_variant_images/".$file_name;
             
-            $request->request->add(['image_name' => $product_variant_image]);
+            $request->request->add(['image_name' => $Event_variant_image]);
 
-            ProductVariantImage::create($request->all());
-            return redirect()->route('admin.manage_product_variant_images',['comb_id'=>$request->comb_id,'product_id'=>$request->product_id])->with('success','Product Variant Image added Successfully.');
+            EventVariantImage::create($request->all());
+            return redirect()->route('admin.manage_Event_variant_images',['comb_id'=>$request->comb_id,'Event_id'=>$request->Event_id])->with('success','Event Variant Image added Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
-    public function update_product_primay_variant(Request $request){
+    public function update_Event_primay_variant(Request $request){
         try{
             $validator = Validator::make($request->all(),[
                 'pvc_id'     => 'required|integer',
-                'product_id'  => 'required|integer'
+                'Event_id'  => 'required|integer'
             ],[],[
                 'pvc_id'=>'Variant ID',
-                'product_id'=>'Product ID'
+                'Event_id'=>'Event ID'
             ]);
 
             if($validator->fails()){
@@ -269,8 +262,8 @@ class ProductController extends Controller
                     'data'=>[]
                 ]);
             }
-            ProductVariantCombination::where(["product_id"=>$request->product_id])->update(["is_primary"=>0]);
-            ProductVariantCombination::where(["id"=>$request->pvc_id])->update(["is_primary"=>1]);
+            EventVariantCombination::where(["Event_id"=>$request->Event_id])->update(["is_primary"=>0]);
+            EventVariantCombination::where(["id"=>$request->pvc_id])->update(["is_primary"=>1]);
 
             return response()->json([
                 'status' => true,
@@ -286,7 +279,7 @@ class ProductController extends Controller
             ]);
         }
     }
-    public function update_product_variant_primay_image(Request $request){
+    public function update_Event_variant_primay_image(Request $request){
         try{
             $validator = Validator::make($request->all(),[
                 'id'     => 'required|integer',
@@ -303,8 +296,8 @@ class ProductController extends Controller
                     'data'=>[]
                 ]);
             }
-            ProductVariantImage::where(["comb_id"=>$request->comb_id])->update(["is_primary"=>0]);
-            ProductVariantImage::where(["id"=>$request->id])->update(["is_primary"=>1]);
+            EventVariantImage::where(["comb_id"=>$request->comb_id])->update(["is_primary"=>0]);
+            EventVariantImage::where(["id"=>$request->id])->update(["is_primary"=>1]);
 
             return response()->json([
                 'status' => true,
@@ -320,24 +313,24 @@ class ProductController extends Controller
             ]);
         }
     }
-    public function list_product_variants($id)
+    public function list_Event_variants($id)
     {
         try{
-            $data["product_variants"] = ProductVariant::where(["product_id"=>$id])->with("variantDetails")->latest()->get();
-            $data["combinations"] = ProductVariantCombinationDetails::where(["product_id"=>$id])->latest()->get();
-            return view('admin.products.add_variants',$data);
+            $data["Event_variants"] = EventVariant::where(["Event_id"=>$id])->with("variantDetails")->latest()->get();
+            $data["combinations"] = EventVariantCombinationDetails::where(["Event_id"=>$id])->latest()->get();
+            return view('admin.events.add_variants',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
-    public function store_product_variant(Request $request)
+    public function store_Event_variant(Request $request)
     {
         try{
-            $pvc_details = ProductVariantCombination::create($request->all());
+            $pvc_details = EventVariantCombination::create($request->all());
             if(!empty($request->variants)){
                 foreach($request->variants as $variant_id=>$variant_value){
-                    ProductVariantCombinationDetails::create([
-                        "product_id"=>$request->product_id,
+                    EventVariantCombinationDetails::create([
+                        "Event_id"=>$request->Event_id,
                         "pvc_id"=>$pvc_details->id,
                         "variant_id"=>$variant_id,
                         "variant_value"=>$variant_value
@@ -345,19 +338,19 @@ class ProductController extends Controller
                 }
             }
 
-            return redirect()->route('admin.manage_variants',$request->product_id)->with('success','Product Variation Detailed added Successfully.');
+            return redirect()->route('admin.manage_variants',$request->Event_id)->with('success','Event Variation Detailed added Successfully.');
        }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
-    public function delete_product_variant_image(Request $request,$id){
+    public function delete_Event_variant_image(Request $request,$id){
         try{
-            $productImageQuery = ProductVariantImage::where(["id"=>$id]);
-            $details = $productImageQuery->first();
-            $productImageQuery->delete();
+            $EventImageQuery = EventVariantImage::where(["id"=>$id]);
+            $details = $EventImageQuery->first();
+            $EventImageQuery->delete();
             unlink(public_path("/uploads/".$details->image_name));
             
-            return redirect()->route('admin.manage_product_variant_images',['comb_id'=>$details->comb_id,'product_id'=>$details->product_id])->with('success','Product Variant Image removed Successfully.');
+            return redirect()->route('admin.manage_Event_variant_images',['comb_id'=>$details->comb_id,'Event_id'=>$details->Event_id])->with('success','Event Variant Image removed Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

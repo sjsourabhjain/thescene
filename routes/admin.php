@@ -63,21 +63,13 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     Route::get('/delete-slider/{id}','SliderController@destroy')->name('delete_slider');
 
     /* Product module*/
-    Route::get('/list-events','ProductController@index')->name('list_product'); Route::get('/create-product','ProductController@create')->name('create_product');
-    Route::post('/store-product','ProductController@store')->name('store_product');
-    Route::get('/show-product/{id}','ProductController@show')->name('show_product');
-    Route::get('/list-product-variants/{id}','ProductController@list_product_variants')->name('list_product_variants');
-    Route::get('/manage-variants/{id}','ProductController@manage_variants')->name('manage_variants');
-    Route::get('/manage-product-variant-images/{comb_id}/{product_id}','ProductController@manage_product_variant_images')->name('manage_product_variant_images');
-    Route::post('/store-product-variant-images','ProductController@store_product_variant_images')->name('store_product_variant_images');
-    Route::post('/update-product-primay-variant','ProductController@update_product_primay_variant')->name('update_product_primay_variant');
-    Route::post('/store-product-variant','ProductController@store_product_variant')->name('store_product_variant');
-    Route::get('/edit-product/{id}','ProductController@edit')->name('edit_product');
-    Route::post('/update-product','ProductController@update')->name('update_product');
-    Route::delete('/delete-product/{id}','ProductController@destroy')->name('delete_product');
-    Route::get('/delete-product-image/{id}/{product_id}','ProductController@delete_product_image')->name('delete_product_image');
-    Route::get('/delete-product-variant-image/{id}','ProductController@delete_product_variant_image')->name('delete_product_variant_image');
-    Route::post('/update-product-variant-primay-image','ProductController@update_product_variant_primay_image')->name('update_product_variant_primay_image');
+    Route::get('/list-events','EventController@index')->name('list_events'); 
+    Route::get('/create-event','EventController@create')->name('create_events');
+    Route::post('/store-event','EventController@store')->name('store_event');
+    Route::get('/show-event/{id}','EventController@show')->name('show_event');
+    Route::get('/edit-event/{id}','EventController@edit')->name('edit_event');
+    Route::post('/update-event','EventController@update')->name('update_event');
+    Route::delete('/delete-event/{id}','EventController@destroy')->name('delete_event');
 
     /* offer module*/
     Route::get('/list-offer','OfferController@index')->name('list_offer');
