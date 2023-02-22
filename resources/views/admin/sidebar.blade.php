@@ -36,10 +36,18 @@
                 </li>
                 @endcan
 
+                <!-- event -->
                 <li class="nav-item {{ (request()->is('admin/*event*')) ? 'active' : '' }}"><a href="javascript:void(0);" class="nav-link"><i class="fal fa-file-alt"></i> Events </a>
                     <ul class="sub-menu">
                         <li class="nav-item {{ (request()->is('admin/list-events')) ? 'active' : '' }}"><a href="{{ route('admin.list_events') }}" class="nav-link">{{__('level.list')}}</a></li>
                         <li class="nav-item {{ (request()->is('admin/create-events')) ? 'active' : '' }}"><a href="{{ route('admin.create_events') }}" class="nav-link">{{__('level.add')}}</a></li>
+                    </ul>
+                </li>
+
+                <!-- sell ticket -->
+                <li class="nav-item {{ (request()->is('admin/*tickets*')) ? 'active' : '' }}"><a href="javascript:void(0);" class="nav-link"><i class="fal fa-file-alt"></i> Sell Ticket </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item {{ (request()->is('admin/list-sell-ticket')) ? 'active' : '' }}"><a href="{{ route('admin.list_sell_ticket') }}" class="nav-link">{{__('level.list')}}</a></li>
                     </ul>
                 </li>
                 

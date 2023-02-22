@@ -3,13 +3,13 @@
         <div class="page-title col-sm-12">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h1 class="h3 m-0">Event</h1>
+                    <h1 class="h3 m-0">Sell Ticket</h1>
                 </div>
                 <div class="col-md-6">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Event</li>
+                            <li class="breadcrumb-item active" aria-current="page">Sell Ticket</li>
                         </ol>
                     </nav>
                 </div>
@@ -25,16 +25,16 @@
                         <div class="box-row flex-wrap user-contact">
                             <div class="d-flex">
                                 <label>Name</label>
-                                <span class="text-muted">{{ $product_details->product_name }}</span>
+                                <span class="text-muted">{{ $sellticket_details->product_name }}</span>
                             </div>
                         </div>
-                        @if(!$product_details->categories->isEmpty())
+                        @if(!$sellticket_details->categories->isEmpty())
                         <div class="box-row flex-wrap user-contact">
                             <div class="d-flex">
                                 <label>Categories</label>
                                 <span class="text-muted">
                                     <ul>
-                                    @foreach($product_details->categories as $category)
+                                    @foreach($sellticket_details->categories as $category)
                                         <li>{{ $category->categoryDetails->category_name }}</li>
                                     @endforeach
                                     </ul>
@@ -42,13 +42,13 @@
                             </div>
                         </div>
                         @endif
-                        @if(!$product_details->variants->isEmpty())
+                        @if(!$sellticket_details->variants->isEmpty())
                         <div class="box-row flex-wrap user-contact">
                             <div class="d-flex">
                                 <label>Variants</label>
                                 <span class="text-muted">
                                     <ul>
-                                    @foreach($product_details->variants as $variant)
+                                    @foreach($sellticket_details->variants as $variant)
                                         <li>{{ $variant->variantDetails->name }}</li>
                                     @endforeach
                                     </ul>

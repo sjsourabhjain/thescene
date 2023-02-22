@@ -72,7 +72,10 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     Route::post('/update-event','EventController@update')->name('update_event');
     Route::delete('/delete-event/{id}','EventController@destroy')->name('delete_event');
 
-
+    /* sell ticket module*/
+    Route::get('/list-sell-ticket','SellTicketController@index')->name('list_sell_ticket'); 
+    Route::get('/show-sell-ticket/{id}','SellTicketController@show')->name('show_sell_ticket');
+   
 
     /* offer module*/
     Route::get('/list-offer','OfferController@index')->name('list_offer');
