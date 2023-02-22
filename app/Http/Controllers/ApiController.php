@@ -19,13 +19,13 @@ class ApiController extends Controller
 
         //Validate data
         $validator = Validator::make($request->all(),[
-            'mob_no'     => 'required|numeric',
+            'full_name'     => 'required|min:3|max:255',
             'email'  => 'required|email|unique:users',
             'password' => 'required|string|min:6',
             'role' => 'required|numeric'
         ],[],[
             'email'=> 'Email',
-            'mob_no'=> 'Mobile No.',
+            'full_name'=> 'Name',
             'password'=> 'Password',
             'role' => 'Role is required'
         ]);
@@ -67,10 +67,10 @@ class ApiController extends Controller
                 // register a new user
 
                 User::create([
+                    'full_name' => $request->full_name,
                     'email' => $request->email,
-                    'mob_no'=>$request->mob_no,
-                    'otp'=>$otp, //static
-                    'role_id'=>$request->role,
+                    'otp' => $otp, //static
+                    'role_id' => $request->role,
                     'password' => Hash::make($request->password)
                 ]);
 
@@ -137,6 +137,7 @@ class ApiController extends Controller
             ]);
         }
     }
+
     /*public function verifyAccount(Request $request){
         //Validate data
 
@@ -187,6 +188,7 @@ class ApiController extends Controller
             ]);
         }
     }
+
     public function verifyOtp(Request $request){
         //Validate data
 
@@ -493,14 +495,14 @@ class ApiController extends Controller
 
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric',
-            'full_name' => 'required',
+            'full_name' => 'required|min:3|max:255',
             // 'email' => 'required|email',
-            'mob_no' => 'required'
+            // 'mob_no' => 'required'
         ],[],[
             'user_id' => 'User ID',
             'full_name' => 'Full Name',
-            'email' => 'Email',
-            'mob_no' => 'Mobile No.'
+            // 'email' => 'Email',
+            // 'mob_no' => 'Mobile No.'
         ]);
         if($validator->fails()){
             return response()->json([
@@ -517,7 +519,7 @@ class ApiController extends Controller
             {
                 User::where(["id"=>$request->user_id])->update([
                     "full_name"=>$request->full_name,
-                    "mob_no" => $request->mob_no
+                    // "mob_no" => $request->mob_no
                 ]);
                 return response()->json([
                     'status' => true,
