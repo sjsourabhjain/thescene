@@ -551,5 +551,14 @@ class ApiController extends Controller
                 'data'=>$data
             ]);
     }
+
+    public function eventListDetail(Request $request){
+        $data = Event::where([['id',$request->id],['status'=>1]])->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'Event List fetch successfully.',
+            'data'=>$data
+        ]);
+    }
 }
 ?>
