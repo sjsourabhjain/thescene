@@ -60,6 +60,15 @@ Route::get('/register', function() {
 Route::get('/login', function() {
   return view('webviews/login');
 });
+Route::get('/ticket-detail', function() {
+  return view('webviews/ticket-detail');
+});
+Route::get('/reset-password', function() {
+  return view('webviews/resetpswrd');
+});
+Route::get('/profile', function() {
+  return view('webviews/profile');
+});
 Route::post('login',[UserController::class,'login'])->name('login');
 Route::post('register',[UserController::class,'register'])->name('register');
 Route::get('/events',[EventController::class,'index'])->name('events');
