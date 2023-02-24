@@ -91,7 +91,10 @@
         ajax: "{{ route('admin.list_user') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'full_name', name: 'full_name'},
+            {data: 'email', name: 'email'},
             {data: 'mob_no', name: 'mob_no'},
+            {data: 'role_id', name: 'role_id'},
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
         ]
