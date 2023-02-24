@@ -45,7 +45,7 @@ class UserController extends Controller
     }
     public function index(Request $request){
         try{
-            $data["users"] = User::where('role_id',4)->latest()->get();
+            $data["users"] = User::whereIn('role_id',[2,3])->orderby('id','desc')->get();
             if ($request->ajax()) {
                 return Datatables::of($data["users"])
                         ->addIndexColumn()

@@ -3,18 +3,19 @@
         <div class="page-title col-sm-12">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h1 class="h3 m-0">Events</h1>
+                    <h1 class="h3 m-0">Sell Ticket</h1>
                 </div>
                 <div class="col-md-6">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Event</li>
+                            <li class="breadcrumb-item active" aria-current="page">Sell Ticket</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
+
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12 mb-4">
@@ -31,26 +32,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(!empty($products))
-                                            @foreach($products as $product)
+                                        @if(!empty($tickets))
+                                            @foreach($tickets as $ticket)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $product->product_name }}</td>
-                                                    <td>{{ $product->product_sku_id }}</td>
+                                                    <td>{{ $ticket->ticket_name }}</td>
+                                                    <td>{{ $ticket->ticket_sku_id }}</td>
                                                     <td class="action">
-                                                        <a href="{{ route('admin.show_product',$product->id) }}">
+                                                        <a href="{{ route('admin.show-sell-ticket',$ticket->id) }}">
                                                             <button type="button" class="icon-btn preview">
                                                                 <i class="fal fa-eye"></i>
-                                                            </button>
-                                                        </a>
-                                                        <a href="{{ route('admin.manage_variants',$product->id) }}">
-                                                            <button type="button" class="icon-btn preview">
-                                                                <i class="fal fa-box"></i>
-                                                            </button>
-                                                        </a>
-                                                        <a href="{{ route('admin.edit_product',$product->id) }}">
-                                                            <button type="button" class="icon-btn edit">
-                                                                <i class="fal fa-edit"></i>
                                                             </button>
                                                         </a>
                                                     </td>
@@ -66,16 +57,17 @@
             </div>
         </div>
 @endsection
+
 @push('current-page-js')
 <script type="text/javascript">
     var table = $('#dataTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.list_events') }}",
+        ajax: "{{ route('admin.list_sell_ticket') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'product_name', name: 'product_name'},
-            {data: 'product_sku_id', name: 'product_sku_id'},
+            {data: 'ticket_name', name: 'ticket_name'},
+            {data: 'ticket_sku_id', name: 'ticket_sku_id'},
             {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
         ]
     });
