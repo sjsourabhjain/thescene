@@ -38,13 +38,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            {{-- <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label>Mobile Number</label>
                                     <div class="input-group"></div>
                                         <input type="number" min="0" minlength="8" maxlength="12" class="form-control chkNumber" id="mob_no" name="mob_no" autocomplete="off" value="{{ $user_details->mob_no }}">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-12 mb-3 text-center">
                                 <a type="submit" href="{{ route('admin.list_user') }}" class="btn light">Cancel</a>
                                 <button type="submit" class="btn">Submit</button>

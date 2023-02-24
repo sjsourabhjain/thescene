@@ -57,8 +57,9 @@ class UserController extends Controller
                             }
                         })
                         ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.show_user',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
-                            $btn .= '<a href="'.route('admin.edit_user',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            $btn = '<a href="'.route('admin.show_user',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>&nbsp';
+                            $btn .= '<a href="'.route('admin.edit_user',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>&nbsp';
+                            $btn .= '<a href="'.route('admin.delete_user',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fa fa-trash"></i></button></a>';
 
                             return $btn;
                         })
@@ -161,11 +162,11 @@ class UserController extends Controller
         $validator = $request->validate([
             'full_name'     => 'required|string',
             'email'  => 'nullable|email|unique:users,email,'.$request->update_id,
-            'mob_no'     => 'required|numeric|digits_between:8,12|unique:users,mob_no,'.$request->update_id,
+            //'mob_no'     => 'required|numeric|digits_between:8,12|unique:users,mob_no,'.$request->update_id,
         ],[],[
             'full_name'=>'Name',
             'email'=>'Email',
-            'mob_no'=>'Mobile No.',
+            //'mob_no'=>'Mobile No.',
         ]);
         try{
             $user_details = User::where(["id"=>$request->update_id])->update($validator);
@@ -189,6 +190,7 @@ class UserController extends Controller
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
     }
+
     public function update_user_status($id){
         try{
             $user_details = User::where(["id"=>$id])->first();

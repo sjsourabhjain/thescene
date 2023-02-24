@@ -75,7 +75,10 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
     /* sell ticket module*/
     Route::get('/list-sell-ticket','SellTicketController@index')->name('list_sell_ticket'); 
     Route::get('/show-sell-ticket/{id}','SellTicketController@show')->name('show_sell_ticket');
-   
+
+    /* contact-us module*/
+    Route::get('/list-contactus','ContactUsController@index')->name('list_contactus'); 
+    Route::get('/delete-contactus/{id}','ContactUsController@destroy')->name('delete_contactus');
 
     /* offer module*/
     Route::get('/list-offer','OfferController@index')->name('list_offer');

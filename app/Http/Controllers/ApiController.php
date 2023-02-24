@@ -95,9 +95,8 @@ class ApiController extends Controller
 
     public function forget_password(Request $request){
         //Validate data
-
         $validator = Validator::make($request->all(),[
-            'email'     => 'required'
+            'email'     => 'required|email'
         ],[],[
             'email'=>'Email'
         ]);
@@ -126,7 +125,7 @@ class ApiController extends Controller
             $userDetails->save();
             return response()->json([
                 'status' => true,
-                'message' => 'Otp sent',
+                'message' => 'Success!!',
                 'data'=>[]
             ]);
         }catch(\Exception $e){
@@ -137,6 +136,55 @@ class ApiController extends Controller
             ]);
         }
     }
+
+
+    public function reset_password(Request $request){
+        //Validate data
+        $validator = Validator::make($request->all(),[
+            'password' => 'required|min:6',
+            'user_id'  => 'required|integer'
+        ],[],[
+            'password'=>'Password'
+        ]);
+
+        //Send failed response if request is not valid
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->messages()->first(),
+                'data'=>[]
+            ]);
+        }
+
+        try{
+            $userDetails = User::where("id", $request->user_id)->where("id", "!=", 1)->first();
+            if(empty($userDetails)){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'No user found',
+                    'data'=>[]
+                ]);
+            }
+
+            $userDetails->password = Hash::make($request->password);
+            $userDetails->save();
+            return response()->json([
+                'status' => true,
+                'message' => 'Password reset successful.',
+                'data'=>[]
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'data'=>[]
+            ]);
+        }
+    }
+
+
+
+
 
     /*public function verifyAccount(Request $request){
         //Validate data
