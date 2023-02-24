@@ -31,15 +31,42 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label>SKU ID</label>
+                                    <label>Price</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control chkAlphabets" name="product_sku_id" autocomplete="off" value="{{ old('product_sku_id') }}" placeholder="Product SKU ID">
+                                        <input type="text" class="form-control chkAlphabets" name="price" autocomplete="off" value="{{ old('price') }}" placeholder="Price">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control chkAlphabets" name="location" autocomplete="off" value="{{ old('location') }}" placeholder="Location">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label>Category</label>
+                                    <div class="input-group">
+                                        <select name="category_id[]" class="selectpicker form-control" multiple>
+                                            <option hidden="" value="">--Select--</option>
+                                            @if(!$categories->isEmpty())
+                                                @foreach($categories as $category)
+                                                    <option
+                                                    @if($category->id==old('category_id'))
+                                                        selected
+                                                    @endif
+                                                    value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label>Type</label>
                                     <div class="input-group">
                                         <select name="category_id[]" class="selectpicker form-control" multiple>
                                             <option hidden="" value="">--Select--</option>
