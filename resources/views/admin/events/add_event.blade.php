@@ -18,7 +18,7 @@
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-lg-12 col-md-4 mb-4">
-                    <form class="box bg-white" method="POST" enctype="multipart/form-data" id="addProductForm" action="{{ route('admin.store_event') }}">
+                    <form class="box bg-white" method="POST" enctype="multipart/form-data" id="" action="{{ route('admin.store_event') }}">
                     @csrf
                         <div class="box-row flex-wrap">
                             <div class="col-md-6 mb-3">
@@ -68,18 +68,7 @@
                                 <div class="form-group">
                                     <label>Type</label>
                                     <div class="input-group">
-                                        <select name="category_id[]" class="selectpicker form-control" multiple>
-                                            <option hidden="" value="">--Select--</option>
-                                            @if(!$categories->isEmpty())
-                                                @foreach($categories as $category)
-                                                    <option
-                                                    @if($category->id==old('category_id'))
-                                                        selected
-                                                    @endif
-                                                    value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
+                                        
                                     </div>
                                 </div>
                             </div>

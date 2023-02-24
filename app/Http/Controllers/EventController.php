@@ -18,4 +18,6 @@ class EventController extends Controller
     	$data['event'] = Event::where('id',$id)->first();
     	return view('webviews/event-details', $data);
     }
+
+    
 }

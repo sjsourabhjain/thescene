@@ -49,6 +49,7 @@ class EventController extends Controller
     public function create(){
         try{
             $data["categories"] = Category::latest()->get();
+            $data["types"] ="";
             return view('admin.events.add_event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
@@ -62,39 +63,25 @@ class EventController extends Controller
      */
     public function store(Request $request){
         $validator = $request->validate([
-            'Event_name'     => 'required|string|max:250',
-            'Event_sku_id'     => 'required',
+            'event_name'     => 'required|string|max:250',
+            'price'     => 'required',
             'category_id'     => 'required'
         ],[],[
-            'Event_name'=>'Event Name',
-            'Event_sku_id'=>'Event SKU ID',
+            'event_name'=>'Event Name',
+            'price'=>'Event SKU ID',
             'category_id'=>'Category'
         ]);
 
         try{
-            $Event_details = Event::create($request->all());
-
-            if(!empty($request->category_id)){
-                foreach($request->category_id as $category){
-                    EventCategory::create([
-                        "id"=>$Event_details->id,
-                        "category_id"=>$category
-                    ]);
-                }
-            }
-
-            if(!empty($request->variants)){
-                foreach($request->variants as $variant){
-                    EventVariant::create([
-                        "id"=>$Event_details->id,
-                        "variant_id"=>$variant
-                    ]);
-                }
-            }
-
+            //$Event_details = Event::create($request->all());
+            $events = new Event();
+            $events->title = $request->event_name;
+            // $events->price = $request->price;
+            // $events->category_id = $request->category_id;
+            $events->save();
             return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
-            return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
+            return redirect()->route('admin.dashboard')->with('error',$e);
         }
     }
 
