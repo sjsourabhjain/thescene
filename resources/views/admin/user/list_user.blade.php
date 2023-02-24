@@ -25,7 +25,10 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
                                             <th scope="col">Mobile No.</th>
+                                            <th scope="col">Role</th>
                                             <th scope="col">Status</th>
                                             <th scope="col" class="action">Action</th>
                                         </tr>
@@ -35,7 +38,16 @@
                                             @foreach($users as $user)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
+                                                    <td>{{ $user->full_name }}</td>
+                                                    <td>{{ $user->email }}</td>
                                                     <td>{{ $user->mob_no }}</td>
+                                                    <td>
+                                                        @if($user->role_id==2)
+                                                            <span class="badge badge-warning">Organiser</span>
+                                                        @elseif($user->role_id==3)
+                                                            <span class="badge badge-success">User</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <a href="{{ route('admin.update_user_status',$user->id) }}" class="">
                                                             @if($user->status==0)
