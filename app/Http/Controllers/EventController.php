@@ -41,6 +41,7 @@ class EventController extends Controller
             $events->slug = str_replace(" ", "-", $request->event_name);
             $events->amount_status = $request->price;
             $events->category_id = $request->category_id;
+            $events->language = $request->language;
             $events->save();
             return redirect()->back()->with('success', 'Event added Successfully');   
             //return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');

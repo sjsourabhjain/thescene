@@ -122,37 +122,32 @@
 							<option value="9">9</option>
 							<option value="10">10</option>
 						</select>
-<select name="numbers" id="language">
-<option value="1">Event Page Language</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-</select>
-
-
-					
-						
+						<select name="numbers" id="language">
+							<option value="1">Event Page Language</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+					</div>
 				</div>
-</div>
-
-<div id="Japan" class="tabcontent2">
-<div class="categr">
-<p>You’ll be able to set a schedule for your recurring event in the next step. Event details and ticket types will apply to all instances.</p>
-						
-				</div>
-
-<div class="term-list">
-<ul id="ulLanguageFilter" class="category-filters">
-								<li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter" value="HINDI"> <span class="tn-checkbox"></span> <span class="tn-label"><strong>Display end time.</strong><br/>
-The end time of your event will be displayed to attendees.</span></label></li>
-			               </ul>
-	</div>
+				<div id="Japan" class="tabcontent2">
+					<div class="categr">
+						<p>You’ll be able to set a schedule for your recurring event in the next step. Event details and ticket types will apply to all instances.</p>
+					</div>
+					<div class="term-list">
+						<ul id="ulLanguageFilter" class="category-filters">
+							<li>
+								<label class="tn-checkbox-container"><input type="checkbox" name="language_filter" value="HINDI"> <span class="tn-checkbox"></span> <span class="tn-label"><strong>Display end time.</strong><br/>
+								The end time of your event will be displayed to attendees.</span></label>
+							</li>
+			            </ul>
+					</div>
 <select name="numbers" id="time">
 <option value="1">Time Zone</option>
 <option value="2">2</option>
@@ -199,22 +194,12 @@ The end time of your event will be displayed to attendees.</span></label></li>
 					<p>Upload event poster</p>
 				  </div>
 				</div>
-				
-				
-	
-				
 			</div>
-			
-			<div class="text-right">
-				    <button class="btn btn-main-md">Discard</button>
-					<input type="submit" name="save" class="btn btn-main-md">Save & Continue</button>
-				</div>
+				<input type="submit" name="save" class="btn btn-main-md" value="Save Event">
+			</div>
 		</div>
 	</div>
 </div>
-</div>
-
 </form>
-
 </section>
 @include('webviews/footer')
