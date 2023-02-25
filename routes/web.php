@@ -71,6 +71,9 @@ Route::get('/reset-password', function() {
 Route::get('/profile', function() {
   return view('webviews/profile');
 });
+Route::get('/create-event', function() {
+  return view('webviews/create-event');
+});
 Route::post('login',[UserController::class,'login'])->name('login');
 Route::post('register',[UserController::class,'register'])->name('register');
 Route::get('/events',[EventController::class,'index'])->name('events');
