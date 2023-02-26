@@ -68,5 +68,29 @@ class Helper{
 		  echo $response;
 		}*/
 	}
+
+	public function storeEvent($data){
+		$validator = $request->validate([
+            'event_name'     => 'required|string|max:250',
+            'price'     => 'required',
+            'category_id'     => 'required'
+        ],[],[
+            'event_name'=>'Event Name',
+            'price'=>'Event SKU ID',
+            'category_id'=>'Category'
+        ]);
+
+        try{
+            //$Event_details = Event::create($request->all());
+            $events = new Event();
+            $events->title = $request->event_name;
+            // $events->price = $request->price;
+            // $events->category_id = $request->category_id;
+            $events->save();
+            return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
+        }catch(\Exception $e){
+            return redirect()->route('admin.dashboard')->with('error',$e);
+        }
+	}
 }
 ?>

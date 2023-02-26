@@ -610,5 +610,48 @@ class ApiController extends Controller
             'data'=>$data
         ]);
     }
+
+    public function createEvent(Request $request){
+        $validator = $request->validate([
+            'event_name'     => 'required|string|max:250',
+            'price'     => 'required',
+            'category_id'     => 'required'
+        ],[],[
+            'event_name'=>'Event Name',
+            'price'=>'Event SKU ID',
+            'category_id'=>'Category'
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->messages()->first(),
+                'data'=> []
+            ]);
+        }
+        try{
+            
+            //$Event_details = Event::create($request->all());
+            $events = new Event();
+            $events->title = $request->event_name;
+            $events->slug = str_replace(" ", "-", $request->event_name);
+            $events->amount_status = $request->price;
+            $events->category_id = $request->category_id;
+            $events->language = $request->language;
+            $events->save();
+            return response()->json([
+                    'status' => true,
+                    'message' => 'Event created Successfully',
+                    'data'=>[]
+                ]);   
+            //return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => ERROR_MSG.$e,
+                'data'=>[]
+            ]);
+        }
+    }
+
 }
 ?>
