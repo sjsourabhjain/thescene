@@ -33,4 +33,8 @@ class Event extends Model
         'language',
         'description',
     ];
+
+    public function categories(){
+        return $this->belongsTo('App\Models\Category','category_id','id');
+    }
 }
