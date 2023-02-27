@@ -45,10 +45,17 @@ class UserController extends Controller
     }
     public function index(Request $request){
         try{
-            $data["users"] = User::whereIn('role_id',[2])->orderby('id','desc')->get();
+            $data["users"] = User::whereIn('role_id',[2,3])->orderby('id','desc')->get();
             if ($request->ajax()) {
                 return Datatables::of($data["users"])
                         ->addIndexColumn()
+                        ->addColumn('role', function($row){
+                            if($row["role"]==2){
+                                return 'Organiser';
+                            }else{
+                                return 'User';
+                            }
+                        })
                         ->addColumn('status', function($row){
                             if($row["status"]==1){
                                 return '<a href="'.route("admin.update_user_status",$row['id']).'"><span class="badge badge-success">Active</span></a>';
@@ -63,7 +70,7 @@ class UserController extends Controller
 
                             return $btn;
                         })
-                        ->rawColumns(['status','action'])
+                        ->rawColumns(['role','status','action'])
                         ->make(true);
             }
             return view('admin.user.list_user');

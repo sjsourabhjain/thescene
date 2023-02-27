@@ -25,8 +25,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Parent Category</th>
+                                    <th scope="col">Catregory Name</th>
                                     <th scope="col">Status</th>
                                     <th scope="col" class="action">Action</th>
                                 </tr>
@@ -37,11 +36,16 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $category->category_name }}</td>
-                                            <td>{{ isset($category->parent_category->category_name) ?  $category->parent_category->category_name : "" }}</td>>
+                                            <td>{{ $category->status }}</td>
                                             <td class="action">
                                                 <a href="{{ route('admin.edit_category',$category->id) }}">
                                                     <button type="button" class="icon-btn edit">
                                                         <i class="fal fa-edit"></i>
+                                                    </button>
+                                                </a>
+                                                <a href="{{ route('admin.delete_category',$category->id) }}">
+                                                    <button type="button" class="icon-btn delete">
+                                                        <i class="fal fa-trash"></i>
                                                     </button>
                                                 </a>
                                             </td>
