@@ -29,7 +29,6 @@ class EventController extends Controller
                         ->addColumn('action', function($row){
                             $btn = '<a href="'.route('admin.show_event',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
                             $btn .= '<a href="'.route('admin.edit_event',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
-                            $btn .= '<a href="'.route('admin.manage_variants',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-box"></i></button></a>';
                             return $btn;
                         })
                         ->rawColumns(['action'])
@@ -93,10 +92,10 @@ class EventController extends Controller
      */
     public function show($id){
         try{
-            $data["Event_details"] = Event::where(["id"=>$id])->with("variants","categories")->first();
+            $data["event_details"] = Event::where(["id"=>$id])->with("categories")->first();
             return view('admin.events.show_event',$data);
         }catch(\Exception $e){
-            return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
+            return redirect()->route('admin.dashboard')->with('error',$e);
         }
     }
 

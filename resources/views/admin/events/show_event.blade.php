@@ -25,37 +25,19 @@
                         <div class="box-row flex-wrap user-contact">
                             <div class="d-flex">
                                 <label>Name</label>
-                                <span class="text-muted">{{ $product_details->product_name }}</span>
+                                <span class="text-muted">{{ $event_details->title }}</span>
                             </div>
                         </div>
-                        @if(!$product_details->categories->isEmpty())
                         <div class="box-row flex-wrap user-contact">
                             <div class="d-flex">
                                 <label>Categories</label>
                                 <span class="text-muted">
                                     <ul>
-                                    @foreach($product_details->categories as $category)
-                                        <li>{{ $category->categoryDetails->category_name }}</li>
-                                    @endforeach
+                                        <li>{{ $event_details->categories['category_name'] }}</li>
                                     </ul>
                                 </span>
                             </div>
                         </div>
-                        @endif
-                        @if(!$product_details->variants->isEmpty())
-                        <div class="box-row flex-wrap user-contact">
-                            <div class="d-flex">
-                                <label>Variants</label>
-                                <span class="text-muted">
-                                    <ul>
-                                    @foreach($product_details->variants as $variant)
-                                        <li>{{ $variant->variantDetails->name }}</li>
-                                    @endforeach
-                                    </ul>
-                                </span>
-                            </div>
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>

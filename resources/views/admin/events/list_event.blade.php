@@ -74,8 +74,8 @@
         ajax: "{{ route('admin.list_events') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'product_name', name: 'product_name'},
-            {data: 'product_sku_id', name: 'product_sku_id'},
+            {data: 'title', name: 'title'},
+            {data: 'category_id', name: 'category_id'},
             {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
         ]
     });
