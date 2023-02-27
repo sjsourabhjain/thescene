@@ -30,10 +30,10 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="sign-up" method="post" id="signUpForm" action="{{route('register')}}">
+                        <form action="{{route('register')}}" method="post" id="signUpForm">
                             @csrf
                             <!-- Username -->
-                            <input class="form-control main adjust" type="text" placeholder="Name" name="first_name" >
+                            <input class="form-control main adjust" type="text" placeholder="Name" name="name" >
                             <!-- Email -->
                             <input class="form-control main" type="email" placeholder="Email" name="email" >
                             <!-- Password -->

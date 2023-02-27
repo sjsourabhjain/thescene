@@ -14,7 +14,7 @@
                 <li class="nav-item {{ (request()->is('admin/*user*')) ? 'active' : '' }}"><a href="javascript:void(0);" class="nav-link"><i class="fa fa-users" style="color:#00a9c3"></i> {{__('level.users')}} </a>
                     <ul class="sub-menu">
                         <li class="nav-item {{ (request()->is('admin/list-user')) ? 'active' : '' }}"><a href="{{ route('admin.list_user') }}" class="nav-link">{{__('level.list')}}</a></li>
-                        <li class="nav-item {{ (request()->is('admin/create-user')) ? 'active' : '' }}"><a href="{{ route('admin.create_user') }}" class="nav-link">{{__('level.add')}}</a></li>
+                        {{-- <!-- <li class="nav-item {{ (request()->is('admin/create-user')) ? 'active' : '' }}"><a href="{{ route('admin.create_user') }}" class="nav-link">{{__('level.add')}}</a></li> --> --}}
                     </ul>
                 </li>
                 @endcan
@@ -48,6 +48,13 @@
                 <li class="nav-item {{ (request()->is('admin/*tickets*')) ? 'active' : '' }}"><a href="javascript:void(0);" class="nav-link"><i class="fa fa-ticket" style="color:#00a9c3"></i> Sell Ticket </a>
                     <ul class="sub-menu">
                         <li class="nav-item {{ (request()->is('admin/list-sell-ticket')) ? 'active' : '' }}"><a href="{{ route('admin.list_sell_ticket') }}" class="nav-link">{{__('level.list')}}</a></li>
+                    </ul>
+                </li>
+
+                <!-- contact -->
+                <li class="nav-item {{ (request()->is('admin/*contact*')) ? 'active' : '' }}"><a href="javascript:void(0);" class="nav-link"><i class="fa fa-phone-square" style="color:#00a9c3"></i> Contact Message </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item {{ (request()->is('admin/list-contactus')) ? 'active' : '' }}"><a href="{{ route('admin.list_contactus') }}" class="nav-link">{{__('level.list')}}</a></li>
                     </ul>
                 </li>
                 

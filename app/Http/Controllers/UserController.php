@@ -8,7 +8,6 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    //
     public function login(Request $request){
         $validator = Validator::make($request->all(),[
             'email'      => 'required|email',
@@ -24,6 +23,7 @@ class UserController extends Controller
         }
 
         try{
+
             if(Auth::attempt(["email"=>$request->email,'password'=>$request->password])){
                 echo "you are login successfully";
                 //return redirect()->route('/');
@@ -36,10 +36,12 @@ class UserController extends Controller
     }
 
     public function register(Request $request){
+
         $validator = Validator::make($request->all(),[
             'name'  => 'required',
-            'email'      => 'required|email',
-            'password'  => 'required',
+            'email'      => 'required|email|unique:users',
+            'password' => 'min:6',
+            'confirm_password' => 'required_with:password|same:password|min:6'
         ]);
 
         if($validator->fails()){
