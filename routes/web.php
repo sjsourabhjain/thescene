@@ -32,9 +32,7 @@ Route::get('/clear-cache',[OtherController::class,'clear_cache']);
 Route::get('/migrate-run',[OtherController::class,'migrate_run']);
 
 Route::middleware('auth')->group(function(){
-
-      //test
-
+  //test
 });
 
 Route::get('/', function() {

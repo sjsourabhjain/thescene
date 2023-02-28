@@ -15,6 +15,7 @@ class ContactUsController extends Controller
                 return Datatables::of($data["contacts"])
                         ->addIndexColumn()
                         ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('admin.show_contactus',$row['id']) .'"><button type="button" class="icon-btn preview"><i class="fa fa-eye"></i></button></a>';
                             $btn .= '<a href="'.route('admin.delete_contactus',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fa fa-trash"></i></button></a>';
 
                             return $btn;
@@ -23,6 +24,22 @@ class ContactUsController extends Controller
                         ->make(true);
             }
             return view('admin.contact_us.list_contactus');
+        }catch(\Exception $e){
+            return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try{
+            $data["contact"] = ContactUs::where(["id"=>$id])->first();
+            return view('admin.contact_us.show_contactus',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

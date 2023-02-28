@@ -28,7 +28,7 @@
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Subject</th>
-                                            <th scope="col">Description</th>
+                                            {{-- <!-- <th scope="col">Description</th> --> --}}
                                             <th scope="col" class="action">Action</th>
                                         </tr>
                                     </thead>
@@ -67,7 +67,7 @@
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'subject', name: 'subject'},
-            {data: 'description', name: 'description'},
+            // {data: 'description', name: 'description'},
             {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
         ]
     });

@@ -594,6 +594,7 @@ class ApiController extends Controller
         }
     }
 
+    //on api
     public function eventsList(Request $request){
         $data = Event::where('status',1)->get();
         return response()->json([
@@ -603,6 +604,7 @@ class ApiController extends Controller
             ]);
     }
 
+    //on api
     public function eventListDetail(Request $request){
         $data = Event::where([['id',$request->id],['status'=>1]])->get();
         return response()->json([
@@ -656,7 +658,6 @@ class ApiController extends Controller
 
     public function contact(Request $request){
         try{
-            
             //$Event_details = Event::create($request->all());
             $contact = new ContactUs();
             $contact->name = $request->name;
@@ -664,7 +665,7 @@ class ApiController extends Controller
             $contact->subject = $request->subject;
             $contact->description = $request->message;
             $contact->save();
-            return redirect()->back()->with('success', 'Contactus  Successfully');   
+            return redirect()->back()->with('success', 'Contactus saved  Successfully');   
             //return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
             dd($e->getMessage());

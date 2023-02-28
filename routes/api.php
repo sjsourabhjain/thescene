@@ -27,6 +27,8 @@ Route::post('verify-otp',[ApiController::class,'verifyOtp']);
 Route::post('login',[ApiController::class,'login']);
 Route::get('list-category',[ApiController::class,'categoryList']);
 Route::get('list-events',[ApiController::class,'eventsList']);
+Route::get('event-detail',[ApiController::class,'eventListDetail']);
+
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('profile',[ApiController::class,'userProfile']);

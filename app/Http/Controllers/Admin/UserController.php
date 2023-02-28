@@ -64,8 +64,8 @@ class UserController extends Controller
                             }
                         })
                         ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.show_user',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>&nbsp';
-                            $btn .= '<a href="'.route('admin.edit_user',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>&nbsp';
+                            $btn = '<a href="'.route('admin.show_user',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fa fa-eye"></i></button></a>&nbsp';
+                            $btn .= '<a href="'.route('admin.edit_user',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fa fa-edit"></i></button></a>&nbsp';
                             $btn .= '<a href="'.route('admin.delete_user',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fa fa-trash"></i></button></a>';
 
                             return $btn;

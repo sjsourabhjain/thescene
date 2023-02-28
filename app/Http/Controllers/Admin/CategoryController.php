@@ -38,8 +38,8 @@ class CategoryController extends Controller
                         //     return "<img height='100' width='100' src='".asset("uploads/".$row["category_image"])."'>";
                         // })
                         ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.edit_category',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
-                            $btn = '<a href="'.route('admin.delete_category',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fal fa-trash"></i></button></a>';
+                            $btn = '<a href="'.route('admin.edit_category',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fa fa-edit"></i></button></a>';
+                            $btn = '<a href="'.route('admin.delete_category',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fa fa-trash"></i></button></a>';
                             return $btn;
                         })
                         ->rawColumns(['status','action'])

@@ -74,8 +74,12 @@
 							<textarea class="form-control main" name="message" rows="10" placeholder="Your Message"></textarea>
 						</div>
 						<!-- Submit Button -->
-						<div class="col-12 text-right">
+						<div class="col-md-4 text-right">
+						</div>
+						<div class="col-md-4 text-right">
 							<input type="submit" name="submit" class="btn btn-main-md" value="Submit">
+						</div>
+						<div class="col-md-4 text-right">
 						</div>
 					</div>
 				</form>
