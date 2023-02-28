@@ -20,24 +20,29 @@ class CategoryController extends Controller
     }
     public function index(Request $request){
         try{
-            $data["categories"] = Category::with("parent_category")->latest()->get();
+            $data["categories"] = Category::orderby('id', 'desc')->get();
             if ($request->ajax()) {
                 return Datatables::of($data["categories"])
                         ->addIndexColumn()
-                        ->addColumn('parent_id', function($row){
-                            if($row["parent_id"]==0){
-                                return "";
+                        ->addColumn('status', function($row){
+                            if($row["status"]==1){
+                                return '<a href="'.route("admin.update_category_status",$row['id']).'"><span class="badge badge-success">Active</span></a>';
+                            }else{
+                                return '<a href="'.route("admin.update_category_status",$row['id']).'"><span class="badge badge-warning">Inactive</span></a>';
                             }
-                            return $row->parent_category->category_name;
                         })
-                        ->addColumn('category_image', function($row){
-                            return "<img height='100' width='100' src='".asset("uploads/".$row["category_image"])."'>";
-                        })
+                        // ->addColumn('category_name', function($row){
+                        //     return $row->category_name;
+                        // })
+                        // ->addColumn('category_image', function($row){
+                        //     return "<img height='100' width='100' src='".asset("uploads/".$row["category_image"])."'>";
+                        // })
                         ->addColumn('action', function($row){
                             $btn = '<a href="'.route('admin.edit_category',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            $btn = '<a href="'.route('admin.delete_category',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fal fa-trash"></i></button></a>';
                             return $btn;
                         })
-                        ->rawColumns(['category_image','action'])
+                        ->rawColumns(['status','action'])
                         ->make(true);
             }
             return view('admin.category.list_category');
@@ -137,16 +142,17 @@ class CategoryController extends Controller
         try{
             $category_image = '';
 
-            if($request->hasFile('image_name')){
-                $file = $request->file('image_name');
-                $originalname = $file->getClientOriginalName();
-                $file_name = time()."_".$originalname;
-                $file->move('uploads/categories/',$file_name);
-                $category_image = "categories/".$file_name;
-                $update_arr["category_image"] = $category_image;
-            }
+            // if($request->hasFile('image_name')){
+            //     $file = $request->file('image_name');
+            //     $originalname = $file->getClientOriginalName();
+            //     $file_name = time()."_".$originalname;
+            //     $file->move('uploads/categories/',$file_name);
+            //     $category_image = "categories/".$file_name;
+            //     $update_arr["category_image"] = $category_image;
+            // }
 
             $update_arr["category_name"] = $request->category_name;
+            $update_arr["status"] = $request->status;
 
             $category_details = Category::where(["id"=>$request->update_id])->update($update_arr);
             return redirect()->route('admin.list_category')->with('success','Category Updated Successfully.');

@@ -15,14 +15,15 @@ class Category extends Authenticatable
      */
     protected $fillable = [
         'category_name',
-        'parent_id'
+        'parent_id',
+        'status'
     ];
 
-    public function parent_category(){
-        return $this->hasOne(Category::class,"id","parent_id");
-    }
+    // public function parent_category(){
+    //     return $this->hasOne(Category::class,"id","parent_id");
+    // }
 
-    public function product_category(){
-        return $this->hasMany(Product::class,"id","category_id");
-    }
+    // public function product_category(){
+    //     return $this->hasMany(Product::class,"id","category_id");
+    // }
 }

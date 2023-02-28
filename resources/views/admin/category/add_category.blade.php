@@ -29,7 +29,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            {{-- <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label>Parent Category</label>
                                     <div class="input-group">
@@ -47,7 +47,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-12 mb-3 text-center">
                                 <a href="{{ route('admin.list_category') }}" class="btn light">Cancel</a>
                                 <button type="submit" class="btn light">Submit</button>
