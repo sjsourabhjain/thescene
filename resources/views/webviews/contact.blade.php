@@ -9,13 +9,6 @@
 		</div>
 	</div>
 </section>
-
-<!--====  End of Page Title  ====-->
-
-
-<!--=====================================
-=            Address and Map            =
-======================================-->
 <section class="address">
 	<div class="container">
 		<div class="row">
@@ -61,19 +54,20 @@
 				<h2 class="mb-5 text-center">Drop us a mail</h2>
 			</div>
 			<div class="col-12">
-				<form action="">
+				<form action="{{route('contact-us')}}" method="POST">
+					@csrf
 					<div class="row">
 						<!-- Name -->
 						<div class="col-md-6 mb-2">
-							<input class="form-control main" type="text" placeholder="Name" required>
+							<input class="form-control main" type="text" name="name" placeholder="Name" required>
 						</div>
 						<!-- Email -->
 						<div class="col-md-6 mb-2">
-							<input class="form-control main" type="email" placeholder="Your Email Address" required>
+							<input class="form-control main" type="email" name="email" placeholder="Your Email Address" required>
 						</div>
 						<!-- subject -->
 						<div class="col-md-12 mb-2">
-							<input class="form-control main" type="text" placeholder="Subject" required>
+							<input class="form-control main" type="text" name="subject" placeholder="Subject" required>
 						</div>
 						<!-- Message -->
 						<div class="col-md-12 mb-2">
@@ -81,7 +75,7 @@
 						</div>
 						<!-- Submit Button -->
 						<div class="col-12 text-right">
-							<button class="btn btn-main-md">Submit</button>
+							<input type="submit" name="submit" class="btn btn-main-md" value="Submit">
 						</div>
 					</div>
 				</form>

@@ -6,6 +6,7 @@ use App\Http\Controllers\OtherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SellTicketController;
+use App\Http\Controllers\ContactUsController;
 
 
 /*
@@ -76,6 +77,7 @@ Route::get('/create-event', function() {
 });
 Route::post('login',[UserController::class,'login'])->name('login');
 Route::post('register',[UserController::class,'register'])->name('register');
+Route::post('contact-us',[ContactUsController::class,'contact'])->name('contact-us');
 Route::get('/events',[EventController::class,'index'])->name('events');
 Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');																		
 Route::post('store-event',[EventController::class,'store'])->name('store-event');
