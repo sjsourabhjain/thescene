@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SellTicketController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -80,6 +81,9 @@ Route::get('/events',[EventController::class,'index'])->name('events');
 Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');																		
 Route::post('store-event',[EventController::class,'store'])->name('store-event');
 
-
+Route::controller(PaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+});
 //add admin
 include('admin.php');
