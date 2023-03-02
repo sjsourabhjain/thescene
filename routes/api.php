@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('register',[ApiController::class,'register']);
+Route::post('contact-us',[ApiController::class,'contact']);
 Route::post('forget-password',[ApiController::class,'forget_password']);
 Route::post('reset-password',[ApiController::class,'reset_password']);
 Route::post('verify-account',[ApiController::class,'verifyAccount']);

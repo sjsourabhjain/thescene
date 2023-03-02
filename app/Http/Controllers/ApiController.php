@@ -665,7 +665,11 @@ class ApiController extends Controller
             $contact->subject = $request->subject;
             $contact->description = $request->message;
             $contact->save();
-            return redirect()->back()->with('success', 'Contactus saved  Successfully');   
+            return response()->json([
+                    'status' => true,
+                    'message' => 'Contact Us created Successfully',
+                    'data'=>[]
+                ]);  
             //return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
             dd($e->getMessage());
