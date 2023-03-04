@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\TicketType;
 use DataTables;
 
 class EventController extends Controller
@@ -48,7 +49,6 @@ class EventController extends Controller
     public function create(){
         try{
             $data["categories"] = Category::latest()->get();
-            $data["types"] ="";
             return view('admin.events.add_event',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
