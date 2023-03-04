@@ -66,17 +66,21 @@
                     <li class="nav-item @@contact">
                         <a class="nav-link" href="/contact-us">Contact</a>
                     </li>
+
+                    @if(Auth::user())
                     <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" style="text-transform: lowercase;" href="#" data-toggle="dropdown"><i class="ti-user"></i>{{Auth::user()->email}}
+                        <a class="nav-link dropdown-toggle" style="text-transform: lowercase;" href="#" data-toggle="dropdown"><i class="ti-user"></i>
+                            {{ Auth::user()->email }}
                             <span><i class="ti-angle-down"></i></span>
                         </a>
                         <!-- Dropdown list -->
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item " href="/account-setting">Account Setting</a></li>
                             <li><a class="dropdown-item" href="logout">Logout</a></li>
-
                         </ul>
                     </li>
+                    @endif
+
                 </ul>
 
                 <ul class="navbar-nav ml-auto">

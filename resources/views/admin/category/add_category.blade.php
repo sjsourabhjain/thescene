@@ -21,6 +21,28 @@
                     <form class="box bg-white" method="POST" enctype="multipart/form-data" id="addCategoryForm" action="{{ route('admin.store_category') }}">
                     @csrf
                         <div class="box-row flex-wrap">
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label>Event Type</label>
+                                    <div class="input-group">
+                                        <select name="parent_id" class="form-control">
+                                            <option hidden="" value="">--Select--</option>
+                                            @if(!$event_types->isEmpty())
+                                                @foreach($event_types as $event_type)
+                                                    <option
+                                                        @if($event_type->id == old('parent_id'))
+                                                            selected
+                                                        @endif
+                                                        value="{{ $event_type->id }}">{{ $event_type->event_type }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label>Category Name</label>
@@ -29,25 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label>Parent Category</label>
-                                    <div class="input-group">
-                                        <select name="parent_id" class="form-control">
-                                            <option hidden="" value="0">--Select--</option>
-                                            @if(!$categories->isEmpty())
-                                                @foreach($categories as $category)
-                                                    <option
-                                                    @if($category->id==old('parent_id'))
-                                                        selected
-                                                    @endif
-                                                    value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> --}}
+
                             <div class="col-md-12 mb-3 text-center">
                                 <a href="{{ route('admin.list_category') }}" class="btn light">Cancel</a>
                                 <button type="submit" class="btn light">Submit</button>
@@ -63,11 +67,17 @@ $("#addCategoryForm").validate({
         category_name: {
             required: true,
         },
+        parent_id: {
+            required: true,
+        }
     },
     messages:{
         category_name:{
             required: 'Category Name is required.'
         },
+        parent_id:{
+            required: 'Event Type is required.'
+        }
     }
 });
 </script>

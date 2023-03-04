@@ -6,10 +6,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
+use App\Models\TicketType;
 use DataTables;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class CategoryController extends Controller
 {
+    use SoftDeletes;
+
     /**
      * Create a new controller instance.
      *
@@ -18,7 +23,9 @@ class CategoryController extends Controller
     public function __construct(){
         
     }
-    public function index(Request $request){
+
+    public function index(Request $request)
+    {
         try{
             $data["categories"] = Category::orderby('id', 'desc')->get();
             if ($request->ajax()) {
@@ -31,15 +38,21 @@ class CategoryController extends Controller
                                 return '<a href="'.route("admin.update_category_status",$row['id']).'"><span class="badge badge-warning">Inactive</span></a>';
                             }
                         })
-                        // ->addColumn('category_name', function($row){
-                        //     return $row->category_name;
-                        // })
+                        ->addColumn('parent_id', function($row){
+                            return $row->parent_id;
+                        })
+                        ->addColumn('category_name', function($row){
+                            return $row->category_name;
+                        })
                         // ->addColumn('category_image', function($row){
                         //     return "<img height='100' width='100' src='".asset("uploads/".$row["category_image"])."'>";
                         // })
                         ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('admin.edit_category',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fa fa-edit"></i></button></a>';
-                            $btn = '<a href="'.route('admin.delete_category',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fa fa-trash"></i></button></a>';
+
+                            $btn = '<a href="'.route('admin.edit_category',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fa fa-edit"></i></button></a> &nbsp;';
+
+                            $btn .= '<a href="'.route('admin.delete_category',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fa fa-trash"></i></button></a>';
+
                             return $btn;
                         })
                         ->rawColumns(['status','action'])
@@ -59,6 +72,7 @@ class CategoryController extends Controller
     {
         try{
             $data["categories"] = Category::latest()->get();
+            $data["event_types"] = TicketType::latest()->get();
             return view('admin.category.add_category',$data);
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
@@ -70,16 +84,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validator = $request->validate([
             'category_name'     => 'required|string|max:250',
+            'parent_id'     => 'required',
         ],[],[
             'category_name'=>'Category Name',
             'parent_id'=>'Parent Category',
         ]);
 
         try{
-            
             Category::create($request->all());
             return redirect()->route('admin.list_category')->with('success','Category Added Successfully.');
         }catch(\Exception $e){
@@ -88,21 +103,21 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        try{
-            $data["category_details"] = Category::where(["id"=>$id])->first();
-            return view('admin.category.show_category',$data);
-        }catch(\Exception $e){
-            return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
-        }
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show($id)
+    // {
+    //     try{
+    //         $data["category_details"] = Category::where(["id"=>$id])->first();
+    //         return view('admin.category.show_category',$data);
+    //     }catch(\Exception $e){
+    //         return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
+    //     }
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -114,6 +129,7 @@ class CategoryController extends Controller
     {
         try{
             $data["category_details"] = Category::where(["id"=>$id])->first();
+            $data["event_types"] = TicketType::latest()->get();
             
             if(empty($data["category_details"])){
                 return redirect()->route('admin.dashboard')->with('error',UNAUTHORIZED_ACCESS);
@@ -134,14 +150,16 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $validator = $request->validate([
-            'category_name'     => 'required|string|max:250'
+            'category_name'     => 'required|string|max:250',
+            'parent_id'     => 'required'
         ],[],[
-            'category_name'=>'Category Name'
+            'category_name'=>'Category Name',
+            'parent_id' => 'Parent Id'
         ]);
 
         try{
-            $category_image = '';
 
+            // $category_image = '';
             // if($request->hasFile('image_name')){
             //     $file = $request->file('image_name');
             //     $originalname = $file->getClientOriginalName();
@@ -151,8 +169,9 @@ class CategoryController extends Controller
             //     $update_arr["category_image"] = $category_image;
             // }
 
+            $update_arr["parent_id"] = $request->parent_id;
             $update_arr["category_name"] = $request->category_name;
-            $update_arr["status"] = $request->status;
+            // $update_arr["status"] = $request->status;
 
             $category_details = Category::where(["id"=>$request->update_id])->update($update_arr);
             return redirect()->route('admin.list_category')->with('success','Category Updated Successfully.');
@@ -171,6 +190,20 @@ class CategoryController extends Controller
         try{
             Category::where(["id"=>$id])->delete();
             return redirect()->route('admin.list_category')->with('success','Category Deleted Successfully.');
+        }catch(\Exception $e){
+            return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
+        }
+    }
+
+    public function updateCategoryStatus($id){
+        try{
+            $user_details = Category::where(["id"=>$id])->first();
+
+            $status = ($user_details->status==INACTIVE) ? ACTIVE : INACTIVE;
+
+            $user_details->status = $status;
+            $user_details->save();
+            return redirect()->route('admin.list_category')->with('success','User Status Updated Successfully.');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

@@ -41,14 +41,25 @@ Route::prefix('/admin')->name('admin.')->namespace('App\Http\Controllers\Admin')
         Route::get('/update-user-status/{id}','UserController@update_user_status')->name('update_user_status');
     });
 
+    /* Ticket Type Module*/
+    Route::get('/list-tickettype','TicketTypeController@index')->name('list_tickettype');
+    Route::get('/create-tickettype','TicketTypeController@create')->name('create_tickettype');
+    Route::post('/store-tickettype','TicketTypeController@store')->name('store_tickettype');
+    // Route::get('/show-tickettype/{id}','TicketTypeController@show')->name('show_tickettype');
+    Route::get('/edit-tickettype/{id}','TicketTypeController@edit')->name('edit_tickettype');
+    Route::post('/update-tickettype','TicketTypeController@update')->name('update_tickettype');
+    // Route::get('/delete-tickettype/{id}','TicketTypeController@destroy')->name('delete_tickettype');
+
+
     /* Category module*/
     Route::get('/list-category','CategoryController@index')->name('list_category');
     Route::get('/create-category','CategoryController@create')->name('create_category');
     Route::post('/store-category','CategoryController@store')->name('store_category');
-    Route::get('/show-category/{id}','CategoryController@show')->name('show_category');
+    // Route::get('/show-category/{id}','CategoryController@show')->name('show_category');
     Route::get('/edit-category/{id}','CategoryController@edit')->name('edit_category');
     Route::post('/update-category','CategoryController@update')->name('update_category');
-    Route::delete('/delete-category/{id}','CategoryController@destroy')->name('delete_category');
+    Route::get('/delete-category/{id}','CategoryController@destroy')->name('delete_category');
+    Route::get('/update-category-status/{id}','CategoryController@updateCategoryStatus')->name('update_category_status');
 
 
     /* Slider module*/

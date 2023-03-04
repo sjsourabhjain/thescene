@@ -27,6 +27,15 @@
                 </li>
                 @endcan
 
+
+                <!-- Event Type / Ticket Type -->
+                <li class="nav-item {{ (request()->is('admin/*tickettype*')) ? 'active' : '' }}"><a href="javascript:void(0);" class="nav-link"><i class="fa fa-calendar" style="color:#00a9c3"></i> Event Type </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item {{ (request()->is('admin/list-tickettype')) ? 'active' : '' }}"><a href="{{ route('admin.list_tickettype') }}" class="nav-link">{{__('level.list')}}</a></li>
+                        <li class="nav-item {{ (request()->is('admin/create-tickettype')) ? 'active' : '' }}"><a href="{{ route('admin.create_tickettype') }}" class="nav-link">{{__('level.add')}}</a></li>
+                    </ul>
+                </li>
+
                 @can('category')
                 <li class="nav-item {{ (request()->is('admin/*category*')) ? 'active' : '' }}"><a href="javascript:void(0);" class="nav-link"><i class="fa fa-share-alt" style="color:#00a9c3"></i> Category </a>
                     <ul class="sub-menu">

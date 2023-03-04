@@ -18,10 +18,32 @@
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-lg-12 col-md-4 mb-4">
-                    <form class="box bg-white" method="POST" id="editCategoryForm" enctype="multipart/form-data" action="{{ route('admin.update_category') }}">
+                    <form class="box bg-white" method="POST" id="editCategoryForm" action="{{ route('admin.update_category') }}">
                     @csrf
                     <input type="hidden" name="update_id" value="{{ $category_details->id }}">
                         <div class="box-row flex-wrap">
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label>Event Type</label>
+                                    <div class="input-group">
+                                        <select name="parent_id" class="form-control">
+                                            <option hidden="" value="">--Select--</option>
+                                            @if(!$event_types->isEmpty())
+                                                @foreach($event_types as $event_type)
+                                                    <option
+                                                        @if($event_type->id == $category_details->parent_id)
+                                                            selected
+                                                        @endif
+                                                        value="{{ $event_type->id }}">{{ $event_type->event_type }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label>Category Name</label>
@@ -30,14 +52,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label>Image</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" name="image_name">
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="col-md-12 mb-3 text-center">
                                 <a type="submit" href="{{ route('admin.list_category') }}" class="btn light">Cancel</a>
                                 <button type="submit" class="btn light">Submit</button>
@@ -53,11 +68,17 @@ $("#editCategoryForm").validate({
         category_name: {
             required: true,
         },
+        parent_id: {
+            required: true,
+        }
     },
     messages:{
         category_name:{
             required: 'Category Name is required.'
         },
+        parent_id: {
+            required: 'Event Name is required.'
+        }
     }
 });
 </script>

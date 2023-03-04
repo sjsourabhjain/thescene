@@ -10,10 +10,14 @@ use App\Models\Country;
 use DataTables;
 use Helper;
 use Hash;
-use DB;
+// use DB;
+// use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class UserController extends Controller
 {
+    // use SoftDeletes;
+
     /**
      * Create a new controller instance.
      *

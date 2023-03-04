@@ -3,13 +3,13 @@
 <div class="page-title col-sm-12">
     <div class="row align-items-center">
         <div class="col-md-6">
-            <h1 class="h3 m-0">Category</h1>
+            <h1 class="h3 m-0">Event Type</h1>
         </div>
         <div class="col-md-6">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb m-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Category</li>
+                    <li class="breadcrumb-item active" aria-current="page">Event Type</li>
                 </ol>
             </nav>
         </div>
@@ -25,27 +25,25 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Event Type</th>
-                                    <th scope="col">Category Name</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Event Type Name</th>
+                                    <!-- <th scope="col">Status</th> -->
                                     <th scope="col" class="action">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($categories))
-                                    @foreach($categories as $category)
+                                @if(!empty($tickettypes))
+                                    @foreach($tickettypes as $tickettype)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ !empty($category->parent_id) ? $category->parent_id : 'No Event Type' }}</td>
-                                            <td>{{ $category->category_name }}</td>
-                                            <td>{{ $category->status }}</td>
+                                            <td>{{ $tickettype->event_type }}</td>
+                                            <!-- <td>{{ $tickettype->status }}</td> -->
                                             <td class="action">
-                                                <a href="{{ route('admin.edit_category',$category->id) }}">
+                                                <a href="{{ route('admin.edit_category',$tickettype->id) }}">
                                                     <button type="button" class="icon-btn edit">
                                                         <i class="fal fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="{{ route('admin.delete_category',$category->id) }}">
+                                                <a href="{{ route('admin.delete_category',$tickettype->id) }}">
                                                     <button type="button" class="icon-btn delete">
                                                         <i class="fal fa-trash"></i>
                                                     </button>
@@ -64,16 +62,15 @@
 </div>
 @endsection
 @push('current-page-js')
+
 <script type="text/javascript">
     var table = $('#dataTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.list_category') }}",
+        ajax: "{{ route('admin.list_tickettype') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'parent_id', name: 'parent_id'},
-            {data: 'category_name', name: 'category_name'},
-            {data: 'status', name: 'status'},
+            {data: 'event_type', name: 'event_type'},
             {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
         ]
     });
