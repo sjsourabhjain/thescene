@@ -605,8 +605,8 @@ class ApiController extends Controller
     }
 
     //on api
-    public function eventListDetail(Request $request){
-        $data = Event::where([['id',$request->id],['status'=>1]])->get();
+    public function eventDetail(Request $request){
+        $data = Event::where('id',$request->id)->with('categories')->first();
         return response()->json([
             'status' => true,
             'message' => 'Event List fetch successfully.',

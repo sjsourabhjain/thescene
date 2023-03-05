@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Event extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    //use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,15 +23,9 @@ class Event extends Model
         'title',
         'slug',
         'image',
-        'tags',
-        'city',
         'location',
-        'link',
         'start_datetime',
         'end_datetime',
-        'time_zone',
-        'language',
-        'description',
     ];
 
     public function categories(){
