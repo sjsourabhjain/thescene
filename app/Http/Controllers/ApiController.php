@@ -477,7 +477,7 @@ class ApiController extends Controller
         }
 
         try{
-            $data = UserAddresses::select(['id','title'])->where('user_id',$request->user_id)->get();
+            $data = UserAddresses::where('user_id',$request->user_id)->get();
             return response()->json([
                 'status' => true,
                 'message' => '',
