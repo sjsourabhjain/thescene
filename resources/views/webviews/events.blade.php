@@ -116,9 +116,7 @@
                             <article class="post-sm">
                                 <!-- Post Image -->
                                 <div class="post-thumb">
-                                    <a href="event-details/{{ $event->slug }}/{{ $event->id }}"><img class="w-100"
-                                            src="{{ asset('storage/' . $event->image) }}"
-                                            alt="Post-Image"></a>
+                                    <a href="event-details/{{ $event->slug }}/{{ $event->id }}"><img class="w-100" src="{{ asset('uploads/' . $event->image) }}" alt="Post-Image"></a>
                                 </div>
                                 <!-- Post Title -->
                                 <div class="post-title">

@@ -5,16 +5,15 @@
 	<div class="col-lg-10 m-auto">
 		<div class="block shadow">
 			<!-- Getting Started -->
-			<form class="cr-ev" action="{{route('store-event')}}" method="POST">
+			<form class="cr-ev" action="{{route('store-event')}}" method="POST" enctype="multipart/form-data">
 				@csrf
 				<div class="faq-item">
 					<!-- Title -->
 					<div class="faq-item-title">
 						<h2>Basic Info</h2>
-						<p>Name your event and tell event-goers why they should come. Add details that highlight what makes it unique.</p>
 					</div> 
 					<input class="form-control main" type="text" placeholder="Event Title*" required name="event_name">
-					<select name="Type" id="events-cr">
+					<select name="type" id="events-cr">
 						<option value="0">Type</option>							 
 					    <option value="1">Appearance</option>
 					    <option value="2">Singing</option>
@@ -40,19 +39,31 @@
 					  	<option value="9">Home & Lifestyle</option>
 					  	<option value="10">Music</option>
 				  	</select>
-					<select name="Type" id="events-cr">
-						<option value="0">Ticket Category</option>							 
-						<option value="1">General Admission</option>
-						<option value="2">VIP</option>
-					</select>
-					<input class="form-control main pr-ad" type="text" name="price" placeholder="$ Price" required>	
 					<div class="faq-item">
 						<div class="faq-item-title">
 							<h2>Location</h2>
 							<p>Help people in the area discover your event and let attendees know where to show up.</p>
-							<input class="form-control main" type="text" placeholder="Search for a venue or address*" required>
+							<input class="form-control main" type="text" placeholder="Search for a venue or address*" name="location" required>
 						</div>
 					</div>
+					<div class="faq-item">
+						<div class="faq-item-title">
+							<h2>General Ticket Details</h2>
+							<p>Help people in the area discover your event and let attendees know where to show up.</p>
+							<input class="form-control main" type="text" placeholder="General Seat" required name="general_seat">
+							<input class="form-control main" type="text" placeholder="General Seat Price" required name="general_seat_price"> 
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<div class="faq-item-title">
+							<h2>VIP Ticket Details</h2>
+							<p>Help people in the area discover your event and let attendees know where to show up.</p>
+							<input class="form-control main" type="text" placeholder="VIP Seat" required name="vip_seat">
+							<input class="form-control main" type="text" placeholder="VIP Seat Price" required name="vip_seat_price"> 
+						</div>
+					</div>
+					
 				</div>
 				<div class="faq-item">
 					<div class="faq-item-title">
@@ -134,13 +145,13 @@
 					</h2>
 					
 				</div>
-				
-				<div class="upl-image">
+				<input type="file" name="image">
+				<!-- <div class="upl-image">
 				  <div class="inner-sec">	
 					<i class="fa fa-upload" aria-hidden="true"></i>
 					<p>Upload event poster</p>
 				  </div>
-				</div>
+				</div> -->
 			</div>
 				<input type="submit" name="save" class="btn btn-main-md" value="Save Event">
 			</div>
