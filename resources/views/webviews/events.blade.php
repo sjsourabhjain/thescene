@@ -13,11 +13,8 @@
                     {{-- <div class="filter-category tn-entity-filter-category">
                     <h5>Language</h5>
                     <ul id="ulLanguageFilter" class="category-filters">
-                        <li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter"
-                                    value="HINDI"> <span class="tn-checkbox"></span> <span
-                                    class="tn-label">HINDI</span></label></li>
-                        <li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter"
-                                    value="ENGLISH"> <span class="tn-checkbox"></span> <span
+                        <li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter" value="HINDI"> <span class="tn-checkbox"></span> <span class="tn-label">HINDI</span></label></li>
+                        <li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter" value="ENGLISH"> <span class="tn-checkbox"></span> <span
                                     class="tn-label">ENGLISH</span></label></li>
                         <li><label class="tn-checkbox-container"><input type="checkbox" name="language_filter"
                                     value="ENGLISHMX4D"> <span class="tn-checkbox"></span> <span

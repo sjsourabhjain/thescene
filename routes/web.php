@@ -72,12 +72,10 @@ Route::get('/reset-password', function() {
 Route::get('/profile', function() {
   return view('webviews/profile');
 });
-Route::get('/create-event', function() {
-  return view('webviews/create-event');
-});
 Route::post('login',[UserController::class,'login'])->name('login');
 Route::post('register',[UserController::class,'register'])->name('register');
 Route::post('contact-us',[ContactUsController::class,'contact'])->name('contact-us');
+Route::get('/create-event',[EventController::class,'create'])->name('create-event');
 Route::get('/events',[EventController::class,'index'])->name('events');
 Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');																		
 Route::get('/ticket-booking/{slug}',[EventController::class,'ticketBooking'])->name('ticket-booking');																		

@@ -14,17 +14,10 @@
 					</div> 
 					<input class="form-control main" type="text" placeholder="Event Title*" required name="event_name">
 					<select name="type" id="events-cr">
-						<option value="0">Type</option>							 
-					    <option value="1">Appearance</option>
-					    <option value="2">Singing</option>
-					    <option value="3">Seminar</option>
-					    <option value="4">Concert</option>
-						<option value="5">Conference</option>
-						<option value="6">Convention</option>
-						<option value="7">Meeting event</option>
-						<option value="8">Social gathering</option>
-						<option value="9">Rally</option>
-						<option value="10">Tour</option>
+						<option value="0">Type</option>
+						@foreach($event_type as $type)							 
+					    <option value="{{$type->id}}">{{$type->event_type}}</option>
+					    @endforeach
 					</select>
 					<select name="category_id" id="events-cr">
 						<option value="0">Category</option>							 
@@ -54,7 +47,6 @@
 							<input class="form-control main" type="text" placeholder="General Seat Price" required name="general_seat_price"> 
 						</div>
 					</div>
-
 					<div class="faq-item">
 						<div class="faq-item-title">
 							<h2>VIP Ticket Details</h2>
@@ -63,77 +55,22 @@
 							<input class="form-control main" type="text" placeholder="VIP Seat Price" required name="vip_seat_price"> 
 						</div>
 					</div>
-					
 				</div>
 				<div class="faq-item">
 					<div class="faq-item-title">
 					<h2>Date & Time</h2>
 					<p>Tell event-goers when your event starts and ends so they can make plans to attend.</p>
 				</div>
-				<div class="tab">
-					<button class="tablinks2" onclick="openCity(event, 'America')">Single Event</button>
-					<button class="tablinks2" onclick="openCity(event, 'Japan')">Recurring event</button>
-				</div>
-				<div id="America" class="tabcontent2">
-					<div class="categr">
-						<p>Single event happens once and can last multiple days</p>
-						<div class="input-group">
-						    <input id="txtDate" type="text" class="form-control date-input" readonly="readonly" />
-						    <label class="input-group-btn" for="txtDate">
-						        <span class="btn btn-default">
-						            <span class="ti-calendar"></span>
-						        </span>
-						    </label>
-						</div>
-						<div class="input-group">
-						    <input id="txtDate" type="text" class="form-control date-input" readonly="readonly" />
-						    <label class="input-group-btn" for="txtDate">
-						        <span class="btn btn-default">
-						            <span class="ti-time"></span>
-						        </span>
-						    </label>
-						</div>
-						<div class="input-group">
-						    <input id="txtDate" type="text" class="form-control date-input" readonly="readonly" />
-						    <label class="input-group-btn" for="txtDate">
-						        <span class="btn btn-default">
-						            <span class="ti-calendar"></span>
-						        </span>
-						    </label>
-						</div>
-						<div class="input-group">
-						    <input id="txtDate" type="text" class="form-control date-input" readonly="readonly" />
-						    <label class="input-group-btn" for="txtDate">
-						        <span class="btn btn-default">
-						            <span class="ti-time"></span>
-						        </span>
-						    </label>
-						</div>
-						<div class="term-list">
-							<ul id="ulLanguageFilter" class="category-filters">
-								<li>
-									<label class="tn-checkbox-container">
-										<input type="checkbox" name="language_filter" value="HINDI"> <span class="tn-checkbox"></span> <span class="tn-label"><strong>Display start time.</strong><br/>
-										The start time of your event will be displayed to attendees.</span></label>
-								</li>
-								<li>
-									<label class="tn-checkbox-container"><input type="checkbox" name="language_filter" value="ENGLISH"> <span class="tn-checkbox"></span> <span class="tn-label"><strong>Display end time.</strong><br/>The end time of your event will be displayed to attendees.</span></label>
-								</li>
-			               	</ul>
-						</div>
+				<select name="events_date_time">
+					<option value="single">Single Event</option>
+					<option value="recurring">Recurring Event</option>
+				</select>
+				<div class="categr">
+					<div class="input-group">
+						<input id="txtDate" type="date time" class="form-control date-input" placeholder="Start Date" />
 					</div>
-				</div>
-				<div id="Japan" class="tabcontent2">
-					<div class="categr">
-						<p>You’ll be able to set a schedule for your recurring event in the next step. Event details and ticket types will apply to all instances.</p>
-					</div>
-					<div class="term-list">
-						<ul id="ulLanguageFilter" class="category-filters">
-							<li>
-								<label class="tn-checkbox-container"><input type="checkbox" name="language_filter" value="HINDI"> <span class="tn-checkbox"></span> <span class="tn-label"><strong>Display end time.</strong><br/>
-								The end time of your event will be displayed to attendees.</span></label>
-							</li>
-			            </ul>
+					<div class="input-group">
+					    <input id="txtDate" type="date time" class="form-control date-input"  />
 					</div>
 				</div>
 			</div>

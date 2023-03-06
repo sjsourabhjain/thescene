@@ -23,7 +23,7 @@ class EventController extends Controller
 
     public function index(Request $request){
         try{
-            $data["events"] = Event::orderby('id', 'desc')->get();
+            $data["events"] = Event::with('categories')->orderby('id', 'desc')->get();
             if ($request->ajax()) {
                 return Datatables::of($data["events"])
                         ->addIndexColumn()

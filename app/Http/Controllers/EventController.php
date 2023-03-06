@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\TicketType;
 use App\Helpers\Helper;
 use Auth;
 
@@ -26,6 +27,11 @@ class EventController extends Controller
         $data['event'] = Event::where('slug',$slug)->first();
 
         return view('webviews/ticket-booking', $data);
+    }
+
+    public function create(){
+        $data['event_type'] = TicketType::get();
+        return view('webviews/create-event',$data);
     }
 
     public function store(Request $request){

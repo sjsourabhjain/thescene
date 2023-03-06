@@ -26,7 +26,8 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col">SKU ID</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Location</th>
                                             <th scope="col" class="action">Action</th>
                                         </tr>
                                     </thead>
@@ -76,6 +77,7 @@
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'title', name: 'title'},
             {data: 'category_id', name: 'category_id'},
+            {data: 'location', name: 'location'},
             {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
         ]
     });
