@@ -79,6 +79,17 @@
                             <li><a class="dropdown-item" href="logout">Logout</a></li>
                         </ul>
                     </li>
+                    @else
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" style="text-transform: lowercase;" href="#" data-toggle="dropdown"><i class="ti-user"></i>
+                            <span><i class="ti-angle-down"></i></span>
+                        </a>
+                        <!-- Dropdown list -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item " href="/register">Register</a></li>
+                            <li><a class="dropdown-item" href="/login">login</a></li>
+                        </ul>
+                    </li> 
                     @endif
 
                 </ul>

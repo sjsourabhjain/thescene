@@ -65,6 +65,7 @@ Route::get('/login', function() {
 Route::get('/ticket-detail', function() {
   return view('webviews/ticket-detail');
 });
+
 Route::get('/reset-password', function() {
   return view('webviews/resetpswrd');
 });
@@ -79,6 +80,7 @@ Route::post('register',[UserController::class,'register'])->name('register');
 Route::post('contact-us',[ContactUsController::class,'contact'])->name('contact-us');
 Route::get('/events',[EventController::class,'index'])->name('events');
 Route::get('/event-details/{slug}/{event_id}',[EventController::class,'eventDetails'])->name('events-details');																		
+Route::get('/ticket-booking/{slug}',[EventController::class,'ticketBooking'])->name('ticket-booking');																		
 Route::post('store-event',[EventController::class,'store'])->name('store-event');
 
 Route::controller(PaymentController::class)->group(function(){

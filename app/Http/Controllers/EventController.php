@@ -21,6 +21,12 @@ class EventController extends Controller
     	return view('webviews/event-details', $data);
     }
 
+    public function ticketBooking(Request $request,$slug){
+        $data['event'] = Event::where('slug',$slug)->first();
+
+        return view('webviews/ticket-booking', $data);
+    }
+
     public function store(Request $request){
     	/*$validator = $request->validate([
             'event_name'     => 'required|string|max:250',
