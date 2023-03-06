@@ -48,6 +48,16 @@
                                     id="password_">
                                 <i class="fa-solid fa-eye adj-eye" id="eye_"></i>
                             </div>
+
+                            <div class="form-group">
+                                <select class="form-control js-link" name="user_type" required>
+                                <option class="js-dropdown-list" value="">-- Select your Role/Type --</option>
+                                    <option class="js-dropdown-list" value="3">Other Users</option>
+                                    <option class="js-dropdown-list" value="2">Event Organiser</option>
+                                    <option class="js-dropdown-list" value="4">Promoters/Affliate Marketer</option>
+                                </select>
+                            </div>
+
                             <!-- Submit Button -->
                             <button class="btn btn-main-md" type="submit">sign up</button>
                         </form>

@@ -389,7 +389,10 @@ class ApiController extends Controller
             ]);
         }
     }
-    public function categoryList(Request $request){
+
+
+    public function categoryList(Request $request)
+    {
         try{
             $main_categories = Category::where(["parent_id"=>0])->orderby('id', 'desc')->get();
             $categoryArr = [];
@@ -429,8 +432,9 @@ class ApiController extends Controller
         }     
     }
 
-    public function userProfile(Request $request){
-
+    
+    public function userProfile(Request $request)
+    {
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric'
         ],[],[
@@ -461,8 +465,8 @@ class ApiController extends Controller
         }
     }
 
-    public function userAddresses(Request $request){
-
+    public function userAddresses(Request $request)
+    {
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric'
         ],[],[
@@ -492,8 +496,9 @@ class ApiController extends Controller
         }
     }
     
-    public function store_user_address(Request $request){
 
+    public function store_user_address(Request $request)
+    {
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric',
             'title' => 'required',
@@ -545,13 +550,9 @@ class ApiController extends Controller
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric',
             'full_name' => 'required|min:3|max:255',
-            // 'email' => 'required|email',
-            // 'mob_no' => 'required'
         ],[],[
             'user_id' => 'User ID',
             'full_name' => 'Full Name',
-            // 'email' => 'Email',
-            // 'mob_no' => 'Mobile No.'
         ]);
         if($validator->fails()){
             return response()->json([
@@ -568,7 +569,6 @@ class ApiController extends Controller
             {
                 User::where(["id"=>$request->user_id])->update([
                     "full_name"=>$request->full_name,
-                    // "mob_no" => $request->mob_no
                 ]);
                 return response()->json([
                     'status' => true,
@@ -595,7 +595,8 @@ class ApiController extends Controller
     }
 
     //on api
-    public function eventsList(Request $request){
+    public function eventsList(Request $request)
+    {
         $data = Event::where('status',1)->get();
         return response()->json([
                 'status' => true,
@@ -605,7 +606,8 @@ class ApiController extends Controller
     }
 
     //on api
-    public function eventDetail(Request $request){
+    public function eventDetail(Request $request)
+    {
         $data = Event::where('id',$request->id)->with('categories')->first();
         return response()->json([
             'status' => true,
@@ -614,7 +616,8 @@ class ApiController extends Controller
         ]);
     }
 
-    public function createEvent(Request $request){
+    public function createEvent(Request $request)
+    {
         $validator = $request->validate([
             'event_name'     => 'required|string|max:250',
             'price'     => 'required',
@@ -633,7 +636,6 @@ class ApiController extends Controller
         }
         try{
             
-            //$Event_details = Event::create($request->all());
             $events = new Event();
             $events->title = $request->event_name;
             $events->slug = str_replace(" ", "-", $request->event_name);
@@ -646,7 +648,6 @@ class ApiController extends Controller
                     'message' => 'Event created Successfully',
                     'data'=>[]
                 ]);   
-            //return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
@@ -658,7 +659,6 @@ class ApiController extends Controller
 
     public function contact(Request $request){
         try{
-            //$Event_details = Event::create($request->all());
             $contact = new ContactUs();
             $contact->name = $request->name;
             $contact->email = $request->email;
@@ -670,7 +670,6 @@ class ApiController extends Controller
                     'message' => 'Contact Us created Successfully',
                     'data'=>[]
                 ]);  
-            //return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error',$e);
