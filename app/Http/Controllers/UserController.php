@@ -39,9 +39,10 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(),[
             'name'  => 'required',
-            'email'      => 'required|email|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'min:6',
-            'confirm_password' => 'required_with:password|same:password|min:6'
+            'confirm_password' => 'required_with:password|same:password|min:6',
+            'user_role' => 'required'
         ]);
 
         if($validator->fails()){
@@ -57,7 +58,7 @@ class UserController extends Controller
             $user->full_name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->role_id = 3;
+            $user->role_id = $request->user_role;
             $user->save();
             return redirect()->route('login');
         }catch(\Exception $e){
