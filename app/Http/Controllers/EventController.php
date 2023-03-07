@@ -35,18 +35,26 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-    	/*$validator = $request->validate([
+    	$validator = $request->validate([
             'event_name'     => 'required|string|max:250',
-            'price'     => 'required',
-            'category_id'     => 'required'
+            'type'     => 'required',
+            'category_id'     => 'required',
+            'image'     => 'required',
+            'location'     => 'required',
+            'start_datetime' => 'required',
+            'end_datetime' => 'required'
         ],[],[
-            'event_name'=>'Event Name',
-            'price'=>'Event SKU ID',
-            'category_id'=>'Category'
+            'event_name'     => 'Event Name',
+            'type'     => 'Event Type',
+            'category_id'     => 'Event Category',
+            'image'     => 'Image',
+            'location'     => 'Location',
+            'start_datetime' => 'Event Start Date Time',
+            'end_datetime' => 'Event End Date Time'
         ]);
     	if($validator->fails()){
     		return redirect()->back()->with('error',$validator->messages()->first());
-        }*/
+        }
         try{
             $file = $request->file('image');
             $originalname = $file->getClientOriginalName();

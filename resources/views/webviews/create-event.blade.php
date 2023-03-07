@@ -5,6 +5,11 @@
 	<div class="col-lg-10 m-auto">
 		<div class="block shadow">
 			<!-- Getting Started -->
+			<ul>
+			     @foreach ($errors->all() as $error)
+			         <li>{{ $error }}</li>
+			     @endforeach
+			</ul>
 			<form class="cr-ev" action="{{route('store-event')}}" method="POST" enctype="multipart/form-data">
 				@csrf
 				<div class="faq-item">
@@ -25,6 +30,11 @@
 					    <option value="{{$category->id}}">{{$category->category_name}}</option>
 					    @endforeach
 				  	</select>
+				  	<select name="event_charges" id="events-cr">
+				  		<option value="0">Please select Any Charge type</option>
+				  		<option value="Free">Free</option>
+				  		<option value="Paid">Paid</option>
+				  	</select>
 					<div class="faq-item">
 						<div class="faq-item-title">
 							<h2>Location</h2>
@@ -36,16 +46,16 @@
 						<div class="faq-item-title">
 							<h2>General Ticket Details</h2>
 							<p>Help people in the area discover your event and let attendees know where to show up.</p>
-							<input class="form-control main" type="text" placeholder="General Seat" required name="general_seat">
-							<input class="form-control main" type="text" placeholder="General Seat Price" required name="general_seat_price"> 
+							<input class="form-control main" type="text" placeholder="General Seat" name="general_seat">
+							<input class="form-control main" type="text" placeholder="General Seat Price" name="general_seat_price"> 
 						</div>
 					</div>
 					<div class="faq-item">
 						<div class="faq-item-title">
 							<h2>VIP Ticket Details</h2>
 							<p>Help people in the area discover your event and let attendees know where to show up.</p>
-							<input class="form-control main" type="text" placeholder="VIP Seat" required name="vip_seat">
-							<input class="form-control main" type="text" placeholder="VIP Seat Price" required name="vip_seat_price"> 
+							<input class="form-control main" type="text" placeholder="VIP Seat" name="vip_seat">
+							<input class="form-control main" type="text" placeholder="VIP Seat Price" name="vip_seat_price"> 
 						</div>
 					</div>
 				</div>
@@ -70,20 +80,10 @@
 				</div>
 			</div>
 			<div class="faq-item">
-				<!-- Title -->
 				<div class="faq-item-title">
-					<h2>
-						Upload an Image
-					</h2>
-					
+					<h2>Upload an Image</h2>
 				</div>
 				<input type="file" name="image">
-				<!-- <div class="upl-image">
-				  <div class="inner-sec">	
-					<i class="fa fa-upload" aria-hidden="true"></i>
-					<p>Upload event poster</p>
-				  </div>
-				</div> -->
 			</div>
 				<input type="submit" name="save" class="btn btn-main-md" value="Save Event">
 			</div>
