@@ -19,7 +19,6 @@ class EventController extends Controller
 
     public function eventDetails(Request $request,$slug,$id){
     	$data['event'] = Event::where('id',$id)->first();
-
     	return view('webviews/event-details', $data);
     }
 
@@ -31,6 +30,7 @@ class EventController extends Controller
 
     public function create(){
         $data['event_type'] = TicketType::get();
+        $data['categories'] = Category::get();
         return view('webviews/create-event',$data);
     }
 
@@ -55,7 +55,7 @@ class EventController extends Controller
             $image = "events/".$file_name;
             //$Event_details = Event::create($request->all());
             $events = new Event();
-            $user_id = Auth::user()->id;
+            //$user_id = Auth::user()->id;
             //$event->event_organizer_id = $user_id;
             $events->category_id = $request->category_id;
             $events->type = $request->type;
@@ -67,8 +67,8 @@ class EventController extends Controller
             $events->vip_seat_price = $request->vip_seat_price;
             $events->image = $image;
             $events->location = $request->location;
-            $events->start_datetime = $request->price;
-            $events->end_datetime = $request->price;
+            $events->start_datetime = $request->start_datetime;
+            $events->end_datetime = $request->end_datetime;
 
             $events->save();
             return redirect()->back()->with('success', 'Event added Successfully');   

@@ -21,16 +21,9 @@
 					</select>
 					<select name="category_id" id="events-cr">
 						<option value="0">Category</option>							 
-				    	<option value="1">Business</option>
-				    	<option value="2">Charity</option>
-				    	<option value="3">Community</option>
-				    	<option value="4">Education</option>
-						<option value="5">Fashion</option>
-					  	<option value="6">Film</option>
-					  	<option value="7">Food</option>
-					  	<option value="8">Health & Wealth</option>
-					  	<option value="9">Home & Lifestyle</option>
-					  	<option value="10">Music</option>
+				    	@foreach($categories as $category)							 
+					    <option value="{{$category->id}}">{{$category->category_name}}</option>
+					    @endforeach
 				  	</select>
 					<div class="faq-item">
 						<div class="faq-item-title">
@@ -67,10 +60,12 @@
 				</select>
 				<div class="categr">
 					<div class="input-group">
-						<input id="txtDate" type="date time" class="form-control date-input" placeholder="Start Date" />
+						<label>Start Date & Time</label>
+						<input id="txtDate" type="datetime-local" class="form-control date-input" placeholder="Start Date" name="start_datetime" />
 					</div>
 					<div class="input-group">
-					    <input id="txtDate" type="date time" class="form-control date-input"  />
+						<label>End Date & Time</label>
+					    <input id="txtDate" type="datetime-local" class="form-control date-input" name="end_datetime" />
 					</div>
 				</div>
 			</div>
