@@ -620,12 +620,20 @@ class ApiController extends Controller
     {
         $validator = $request->validate([
             'event_name'     => 'required|string|max:250',
-            'price'     => 'required',
-            'category_id'     => 'required'
+            'type'     => 'required',
+            'category_id'     => 'required',
+            'image'     => 'required',
+            'location'     => 'required',
+            'start_datetime' => 'required',
+            'end_datetime' => 'required'
         ],[],[
-            'event_name'=>'Event Name',
-            'price'=>'Event SKU ID',
-            'category_id'=>'Category'
+            'event_name'     => 'Event Name',
+            'type'     => 'Event Type',
+            'category_id'     => 'Event Category',
+            'image'     => 'Image',
+            'location'     => 'Location',
+            'start_datetime' => 'Event Start Date Time',
+            'end_datetime' => 'Event End Date Time'
         ]);
         if($validator->fails()){
             return response()->json([
@@ -635,13 +643,28 @@ class ApiController extends Controller
             ]);
         }
         try{
-            
+            $file = $request->file('image');
+            $originalname = $file->getClientOriginalName();
+            $file_name = time()."_".$originalname;
+            $file->move('uploads/events/',$file_name);
+            $image = "events/".$file_name;
+            //$Event_details = Event::create($request->all());
             $events = new Event();
+            //$user_id = Auth::user()->id;
+            //$event->event_organizer_id = $user_id;
+            $events->category_id = $request->category_id;
+            $events->type = $request->type;
             $events->title = $request->event_name;
             $events->slug = str_replace(" ", "-", $request->event_name);
-            $events->amount_status = $request->price;
-            $events->category_id = $request->category_id;
-            $events->language = $request->language;
+            $events->vip_seat = $request->vip_seat;
+            $events->general_seat = $request->general_seat;
+            $events->general_seat_price = $request->general_seat_price;
+            $events->vip_seat_price = $request->vip_seat_price;
+            $events->image = $image;
+            $events->location = $request->location;
+            $events->start_datetime = $request->start_datetime;
+            $events->end_datetime = $request->end_datetime;
+
             $events->save();
             return response()->json([
                     'status' => true,

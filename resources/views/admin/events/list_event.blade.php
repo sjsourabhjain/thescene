@@ -27,7 +27,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Category</th>
-                                            <th scope="col">Location</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col" class="action">Action</th>
                                         </tr>
                                     </thead>
@@ -37,7 +37,16 @@
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $product->product_name }}</td>
-                                                    <td>{{ $product->product_sku_id }}</td>
+                                                    <td>{{ $product->category }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.update_user_status',$user->id) }}" class="">
+                                                            @if($product->status==0)
+                                                                <span class="badge badge-warning">Inactive</span>
+                                                            @elseif($product->status==1)
+                                                                <span class="badge badge-success">Active</span>
+                                                            @endif
+                                                        </a>
+                                                    </td>
                                                     <td class="action">
                                                         <a href="{{ route('admin.show_product',$product->id) }}">
                                                             <button type="button" class="icon-btn preview">
@@ -76,8 +85,8 @@
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'title', name: 'title'},
-            {data: 'category_id', name: 'category_id'},
-            {data: 'location', name: 'location'},
+            {data: 'category', name: 'category'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
         ]
     });

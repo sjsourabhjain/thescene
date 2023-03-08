@@ -27,12 +27,22 @@ class EventController extends Controller
             if ($request->ajax()) {
                 return Datatables::of($data["events"])
                         ->addIndexColumn()
+                        ->addColumn('category', function (Event $event) {
+                            return $event->categories->category_name;
+                        })
+                        ->addColumn('status', function($row){
+                            if($row["status"]==1){
+                                return '<a href="'.route("admin.update_user_status",$row['id']).'"><span class="badge badge-success">Active</span></a>';
+                            }else{
+                                return '<a href="'.route("admin.update_user_status",$row['id']).'"><span class="badge badge-warning">Inactive</span></a>';
+                            }
+                        })
                         ->addColumn('action', function($row){
                             $btn = '<a href="'.route('admin.show_event',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
                             $btn .= '<a href="'.route('admin.edit_event',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
                             return $btn;
                         })
-                        ->rawColumns(['action'])
+                        ->rawColumns(['category','status','action'])
                         ->make(true);
             }
             return view('admin.events.list_event');

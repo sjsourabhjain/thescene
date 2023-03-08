@@ -38,6 +38,56 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="box-row flex-wrap user-contact">
+                            <div class="d-flex">
+                                <label>image</label>
+                                <span class="text-muted">
+                                    <ul>
+                                        <li><img src="/uploads/{{ $event_details->image }}"></li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-row flex-wrap user-contact">
+                            <div class="d-flex">
+                                <label>location</label>
+                                <span class="text-muted">
+                                    <ul>
+                                        <li>{{ $event_details->location }}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-row flex-wrap user-contact">
+                            <div class="d-flex">
+                                <label>start_datetime</label>
+                                <span class="text-muted">
+                                    <ul>
+                                        <li>{{ $event_details->start_datetime }}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-row flex-wrap user-contact">
+                            <div class="d-flex">
+                                <label>end_datetime</label>
+                                <span class="text-muted">
+                                    <ul>
+                                        <li>{{ $event_details->end_datetime }}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-row flex-wrap user-contact">
+                            <div class="d-flex">
+                                <label>vip_seat</label>
+                                <span class="text-muted">
+                                    <ul>
+                                        <li>{{ $event_details->vip_seat }}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
