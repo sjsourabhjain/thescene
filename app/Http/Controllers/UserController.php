@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Auth,Hash;
+use Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -25,8 +27,8 @@ class UserController extends Controller
         try{
 
             if(Auth::attempt(["email"=>$request->email,'password'=>$request->password])){
-                echo "you are login successfully";
-                //return redirect()->route('/');
+                //echo "you are login successfully";
+                return redirect()->route('profile');
             }else{
             }
 
@@ -60,9 +62,23 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->role_id = $request->user_role;
             $user->save();
+            $to_name = $request->name;
+            $to_email = $request->email;
+              
+            Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)
+                ->subject('Email confirmation');
+                $message->from('SENDER_EMAIL_ADDRESS','Test Mail');
+            });
             return redirect()->route('login');
         }catch(\Exception $e){
             echo $e->getMessage();die;
         }
+    }
+
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

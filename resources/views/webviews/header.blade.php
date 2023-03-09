@@ -75,8 +75,8 @@
                         </a>
                         <!-- Dropdown list -->
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " href="/account-setting">Account Setting</a></li>
-                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                            <li><a class="dropdown-item " href="profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>
                     @else
