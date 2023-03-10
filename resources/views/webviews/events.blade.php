@@ -26,10 +26,11 @@
 
                         <ul id="ulLanguageFilter" class="category-filters">
                             @foreach ($categories as $category)
-                                <li><label class="tn-checkbox-container"><input {{isset($_GET['categories_filter']) && in_array($category->category_name,$_GET['categories_filter'])?'checked':''}}
+                                <li><label class="tn-checkbox-container"><input {{isset($_GET['categories_filter']) && in_array($category->id,$_GET['categories_filter'])?'checked':''}}
                                             onclick="filterEvents()" type="checkbox" name="categories_filter[]"
-                                            value="{{ $category->category_name }}"> <span class="tn-checkbox"></span>
-                                        <span class="tn-label">{{ Str::upper($category->category_name) }}</span></label>
+                                            value="{{ $category->id }}"> <span class="tn-checkbox"></span>
+                                        <span class="tn-label">{{ Str::upper($category->category_name) }}</span>
+                                    </label>
                                 </li>
                             @endforeach
                         </ul>
@@ -132,7 +133,13 @@
         </div>
     </div>
 </section>
+
+{{ $events->onEachSide(2)->links() }}
+
+{{-- {{ $events->links() }} --}}
+
 {{-- $events->onEachSide(2)->appends(request()->all())->links('pagination::event_pagination') --}}
+
 <!--====  End of Privacy Policy  ====-->
 {{-- <section class="privacy section pt-0">
     <div class="container">

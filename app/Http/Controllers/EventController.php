@@ -11,9 +11,20 @@ use Auth;
 
 class EventController extends Controller
 {
-    public function index(){
-    	$data['events'] = Event::get();
+    public function index(Request $request){
+
+        // $data['events'] = Event::when($request->categories_filter, function ($query, $categories_filter) {
+        //     $query->whereIn('category_id', $categories_filter);
+        // })
+        // ->paginate(10);
+
+        if(!empty($request->categories_filter)){
+            $data['events'] = Event::whereIn('category_id', $request->categories_filter)->paginate(1);
+        }else{
+            $data['events'] = Event::paginate(1);
+        }
     	$data['categories'] = Category::get();
+
     	return view('webviews/events', $data);
     }
 
