@@ -71,6 +71,9 @@ Route::get('/ticket-detail', function() {
 Route::get('/reset-password', function() {
   return view('webviews/resetpswrd');
 });
+Route::get('/forget-password', function() {
+  return view('webviews/forget-password');
+});
 Route::get('/profile', function() {
   return view('webviews/profile');
 });

@@ -1,4 +1,5 @@
-@include('user/header')
+
+@include('webviews/header')
 <section class="user-login section">
 	<div class="container">
 		<div class="row">
@@ -37,4 +38,4 @@
 		</div>
 	</div>
 </section>
-@include('user/footer')
+@include('webviews/footer')
