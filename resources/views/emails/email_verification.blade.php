@@ -29,7 +29,7 @@
 
 						<p>You are receiving this email because we received a password reset request for your account.</p>
 
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Click the link &nbsp;<a href="{{$url}}">Reset Password</a></p>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Click the link &nbsp;<a href="#">Reset Password</a></p>
 
 						<!-- <p>This password reset link will expire in 60 minutes.</p> -->
 
@@ -37,7 +37,7 @@
 
 						<p>Regards,</p>
 
-						<p>Base Library</p>
+						<p>The Scene</p>
 						</td>
 					</tr>
 					<tr>

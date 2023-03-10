@@ -72,7 +72,7 @@ Route::get('/reset-password', function() {
   return view('webviews/resetpswrd');
 });
 Route::get('/profile', function() {
-  return view('webviews/profile');
+  return view('webviews/profile')->name('profile');
 });
 Route::post('login',[UserController::class,'login'])->name('login');
 Route::post('register',[UserController::class,'register'])->name('register');

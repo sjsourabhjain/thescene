@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Hash;
+use Hash,Mail;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -64,11 +64,11 @@ class UserController extends Controller
             $user->save();
             $to_name = $request->name;
             $to_email = $request->email;
-              
-            Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $data = array('name'=>$to_name, 'email' => $to_email);
+            Mail::send('emails.email_verification', $data, function($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)
                 ->subject('Email confirmation');
-                $message->from('SENDER_EMAIL_ADDRESS','Test Mail');
+                $message->from('thescene@gmail.com','Test Mail');
             });
             return redirect()->route('login');
         }catch(\Exception $e){
