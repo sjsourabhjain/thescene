@@ -37,4 +37,5 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('store-user-address',[ApiController::class,'store_user_address']);
     Route::post('update-profile',[ApiController::class,'update_profile']);
     Route::post('place-order',[ApiController::class,'place_order']);
+    Route::post('create-event',[ApiController::class,'createEvent']);
 });

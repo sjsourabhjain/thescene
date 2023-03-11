@@ -46,24 +46,6 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-    	/*$validator = $request->validate([
-            'event_name'     => 'required|string|max:250',
-            'type'     => 'required',
-            'category_id'     => 'required',
-            'image'     => 'required',
-            'location'     => 'required',
-            'start_datetime' => 'required',
-            'end_datetime' => 'required'
-        ],[],[
-            'event_name'     => 'Event Name',
-            'type'     => 'Event Type',
-            'category_id'     => 'Event Category',
-            'image'     => 'Image',
-            'location'     => 'Location',
-            'start_datetime' => 'Event Start Date Time',
-            'end_datetime' => 'Event End Date Time'
-        ]);*/
-
         $validator = Validator::make($request->all(),[
             'event_name'     => 'required|string|max:250',
             'type'     => 'required',
@@ -101,9 +83,7 @@ class EventController extends Controller
 
             $events->save();
             return redirect()->back()->with('success', 'Event added Successfully');   
-            //return redirect()->route('admin.list_event')->with('success','Event Added Successfully.');
         }catch(\Exception $e){
-        	dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error',$e);
         }
     }
