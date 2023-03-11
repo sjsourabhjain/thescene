@@ -75,7 +75,14 @@ class ApiController extends Controller
                     'password' => Hash::make($request->password)
                 ]);
 
-                //Helper::sendOTP($request->mob_no,$otp);
+                $to_name = $request->full_name,
+                $to_email = $request->email,
+                $data = array('name'=>$to_name, 'email' => $to_email);
+                Mail::send('emails.email_verification', $data, function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)
+                    ->subject('Email confirmation');
+                    $message->from('thescene@gmail.com','Test Mail');
+                });
 
                 //User created, return success response
                 return response()->json([
@@ -119,10 +126,14 @@ class ApiController extends Controller
                     'data'=>[]
                 ]);
             }
-
-            $otp = "1234";
-            $userDetails->otp = $otp;
-            $userDetails->save();
+            $to_name =$userDetails->full_name;
+            $to_name =$userDetails->email;
+            $data = array('name'=>$to_name, 'email' => $to_email);
+            Mail::send('emails.email_verification', $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)
+                ->subject('Email confirmation');
+                $message->from('thescene@gmail.com','Test Mail');
+            });
             return response()->json([
                 'status' => true,
                 'message' => 'Success!!',
