@@ -134,7 +134,7 @@
     </div>
 </section>
 
-{{ $events->onEachSide(2)->links() }}
+{{-- $events->onEachSide(2)->links() --}}
 
 {{-- {{ $events->links() }} --}}
 

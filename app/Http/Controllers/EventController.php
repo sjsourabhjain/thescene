@@ -21,7 +21,7 @@ class EventController extends Controller
         if(!empty($request->categories_filter)){
             $data['events'] = Event::whereIn('category_id', $request->categories_filter)->paginate(1);
         }else{
-            $data['events'] = Event::paginate(1);
+            $data['events'] = Event::with('categories')->get();
         }
     	$data['categories'] = Category::get();
 
