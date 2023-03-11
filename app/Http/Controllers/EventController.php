@@ -7,7 +7,7 @@ use App\Models\Event;
 use App\Models\Category;
 use App\Models\TicketType;
 use App\Helpers\Helper;
-use Auth;
+use Auth,Validator;
 
 class EventController extends Controller
 {
@@ -46,7 +46,7 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-    	$validator = $request->validate([
+    	/*$validator = $request->validate([
             'event_name'     => 'required|string|max:250',
             'type'     => 'required',
             'category_id'     => 'required',
@@ -62,6 +62,16 @@ class EventController extends Controller
             'location'     => 'Location',
             'start_datetime' => 'Event Start Date Time',
             'end_datetime' => 'Event End Date Time'
+        ]);*/
+
+        $validator = Validator::make($request->all(),[
+            'event_name'     => 'required|string|max:250',
+            'type'     => 'required',
+            'category_id'     => 'required',
+            'image'     => 'required',
+            'location'     => 'required',
+            'start_datetime' => 'required',
+            'end_datetime' => 'required'
         ]);
     	if($validator->fails()){
     		return redirect()->back()->with('error',$validator->messages()->first());
